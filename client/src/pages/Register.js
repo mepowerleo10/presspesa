@@ -10,6 +10,7 @@ import Logo from '../components/Logo';
 // sections
 import { RegisterForm } from '../sections/auth/register';
 import AuthSocial from '../sections/auth/AuthSocial';
+import constants from 'src/components/constants';
 
 // ----------------------------------------------------------------------
 
@@ -76,19 +77,10 @@ export default function Register() {
           )}
         </HeaderStyle>
 
-        {mdUp && (
-          <SectionStyle>
-            <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Manage the job more effectively with Minimal
-            </Typography>
-            <img alt="register" src="/static/illustrations/illustration_register.png" />
-          </SectionStyle>
-        )}
-
         <Container>
           <ContentStyle>
             <Typography variant="h4" gutterBottom>
-              Get started absolutely free.
+              Sign Up, it is absolutely free!
             </Typography>
 
             <Typography sx={{ color: 'text.secondary', mb: 5 }}>Free forever. No credit card needed.</Typography>
@@ -98,11 +90,11 @@ export default function Register() {
             <RegisterForm />
 
             <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
-              By registering, I agree to Minimal&nbsp;
+              By registering, I agree to {constants.companyName} &nbsp;
               <Link underline="always" color="text.primary" href="#">
                 Terms of Service
               </Link>
-              {''}and{''}
+              {' '}and{' '}
               <Link underline="always" color="text.primary" href="#">
                 Privacy Policy
               </Link>
