@@ -1,8 +1,9 @@
 // ----------------------------------------------------------------------
 
 const account = {
-  displayName: 'Jaydon Frankie',
-  email: 'demo@minimals.cc',
+  displayName: 'Omari Masoud',
+  email: 'ommy.masoud@gmail.com',
+  phone: '+255 765829543',
   photoURL: '/static/mock-images/avatars/avatar_default.jpg',
 };
 

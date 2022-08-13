@@ -3,7 +3,7 @@ import { sample } from 'lodash';
 
 // ----------------------------------------------------------------------
 
-const users = [...Array(24)].map((_, index) => ({
+const payments = [...Array(24)].map((_, index) => ({
   id: faker.datatype.uuid(),
   avatarUrl: `/static/mock-images/avatars/avatar_${index + 1}.jpg`,
   name: faker.name.findName(),
@@ -22,6 +22,8 @@ const users = [...Array(24)].map((_, index) => ({
     'Front End Developer',
     'Full Stack Developer',
   ]),
+  date: faker.date.past(),
+  amount: faker.random.numeric(3)
 }));
 
-export default users;
+export default payments;

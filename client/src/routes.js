@@ -3,14 +3,13 @@ import { Navigate, useRoutes } from "react-router-dom";
 import DashboardLayout from "./layouts/dashboard";
 import LogoOnlyLayout from "./layouts/LogoOnlyLayout";
 //
-import Blog from "./pages/Blog";
-import User from "./pages/User";
+import Ads from "./pages/Ads";
+import Payments from "./pages/Payments";
 import Login from "./pages/Login";
 import NotFound from "./pages/Page404";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
 import DashboardApp from "./pages/DashboardApp";
-import Home from "./pages/Home";
 
 // ----------------------------------------------------------------------
 
@@ -21,14 +20,10 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { path: "app", element: <DashboardApp /> },
-        { path: "user", element: <User /> },
+        { path: "payments", element: <Payments /> },
         { path: "products", element: <Products /> },
-        { path: "blog", element: <Blog /> },
+        { path: "ads", element: <Ads /> },
       ],
-    },
-    {
-      path: "/home",
-      element: <Home />,
     },
     {
       path: "/",

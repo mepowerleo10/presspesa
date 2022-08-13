@@ -14,16 +14,11 @@ const MENU_OPTIONS = [
   {
     label: 'Home',
     icon: 'eva:home-fill',
-    linkTo: '/',
+    linkTo: '/dashboard/ads',
   },
   {
     label: 'Profile',
     icon: 'eva:person-fill',
-    linkTo: '#',
-  },
-  {
-    label: 'Settings',
-    icon: 'eva:settings-2-fill',
     linkTo: '#',
   },
 ];
@@ -86,6 +81,9 @@ export default function AccountPopover() {
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {account.email}
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+            {account.phone}
           </Typography>
         </Box>
 

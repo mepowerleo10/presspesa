@@ -7,13 +7,13 @@ import { fDateTime } from '../../../utils/formatTime';
 
 // ----------------------------------------------------------------------
 
-AppOrderTimeline.propTypes = {
+AppCashFlowTimeline.propTypes = {
   title: PropTypes.string,
   subheader: PropTypes.string,
   list: PropTypes.array.isRequired,
 };
 
-export default function AppOrderTimeline({ title, subheader, list, ...other }) {
+export default function AppCashFlowTimeline({ title, subheader, list, ...other }) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
