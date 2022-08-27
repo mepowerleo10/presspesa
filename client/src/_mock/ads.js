@@ -9,7 +9,7 @@ const AD_TITLES = [
   '✨What is Done is Done ✨',
   'Fresh Prince',
   'Six Socks Studio',
-  'vincenzo de cotiis’ crossing over showcases a research on contamination',
+  'VodaCom mshiko mshiko',
   'Simple, Great Looking Animations in Your Project | Video Tutorial',
   '40 Free Serif Fonts for Digital Designers',
   'Examining the Evolution of the Typical Web Design Client',
