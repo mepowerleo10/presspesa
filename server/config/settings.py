@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "management",
+    "account",
 ]
 
 MIDDLEWARE = [
@@ -108,6 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "account.Account"
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -142,13 +145,10 @@ JAZZMIN_SETTINGS = {
     "changeform_format": "vertical_tabs",
     "related_modal_active": False,
     "topmenu_links": [
-
         # Url that gets reversed (Permissions can be added)
-        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
-
+        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
         # model admin to link to (Permissions checked against model)
         {"model": "management.Company"},
-
         # App with dropdown menu to all its models pages (Permissions checked against models)
         {"app": "management"},
     ],
