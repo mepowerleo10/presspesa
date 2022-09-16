@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "admanagement",
+    "management",
 ]
 
 MIDDLEWARE = [
@@ -147,10 +147,10 @@ JAZZMIN_SETTINGS = {
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # model admin to link to (Permissions checked against model)
-        {"model": "admanagement.Company"},
+        {"model": "management.Company"},
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "admanagement"},
+        {"app": "management"},
     ],
 }
 
