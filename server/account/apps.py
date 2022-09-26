@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
 
-class AdmanagementConfig(AppConfig):
+class AccountConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "admanagement"
-    icon = "fa fa-users"
+    name = "account"
