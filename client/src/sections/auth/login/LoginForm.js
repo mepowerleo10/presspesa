@@ -17,14 +17,24 @@ import { LoadingButton } from "@mui/lab";
 
 import { FormProvider, RHFCheckbox } from "../../../components/hook-form";
 import { auth } from "src/firebase";
-import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import {
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  updateProfile,
+} from "firebase/auth";
 import RHFPhoneField from "src/components/hook-form/RHFPhoneField";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sessionActions } from "src/store";
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const partialUser = useSelector((state) => state.registration.user);
+  const partialRegistration = useSelector(
+    (state) => state.session.partialRegistration
+  );
+
   const [loading, setLoading] = useState(false);
   const [displayOTPField, setDisplayOTPField] = useState(false);
   const [validOTP, setValidOTP] = useState(true);
@@ -68,6 +78,20 @@ export default function LoginForm() {
           displayName: result.user.displayName,
           accessToken: result.user.accessToken,
         };
+
+        if (partialRegistration) {
+          user.email = partialUser.email;
+          user.displayName = partialUser.name;
+          updateProfile(auth.currentUser, {
+            email: user.email,
+            displayName: user.displayName,
+          })
+            .then((result) =>
+              dispatch(sessionActions.updatePartialRegistration(false))
+            )
+            .catch((error) => console.log(error));
+        }
+
         console.log(user);
         dispatch(sessionActions.updateUser(user));
         navigate("/dashboard/app");
@@ -118,9 +142,11 @@ export default function LoginForm() {
           sx={{ my: 2 }}
         >
           <RHFCheckbox name="remember" label="Remember me" />
-          <Link variant="subtitle2" underline="hover">
-            Forgot password?
-          </Link>
+          {!partialRegistration && (
+            <Link variant="subtitle2" underline="hover">
+              Forgot password?
+            </Link>
+          )}
         </Stack>
 
         <div id="recaptcha-container"></div>
