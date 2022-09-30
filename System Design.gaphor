@@ -1180,7 +1180,7 @@ associating them to their use cases.</val>
 <val>(0.0, 0.0)</val>
 </top-left>
 <width>
-<val>133.0</val>
+<val>160.0</val>
 </width>
 <height>
 <val>70.0</val>
@@ -1224,7 +1224,7 @@ associating them to their use cases.</val>
 <val>(0.0, 0.0)</val>
 </top-left>
 <width>
-<val>133.0</val>
+<val>160.0</val>
 </width>
 <height>
 <val>70.0</val>
@@ -1264,7 +1264,7 @@ associating them to their use cases.</val>
 <val>(0.0, 0.0)</val>
 </top-left>
 <width>
-<val>133.0</val>
+<val>160.0</val>
 </width>
 <height>
 <val>70.0</val>
@@ -1303,7 +1303,7 @@ associating them to their use cases.</val>
 <val>(0.0, 0.0)</val>
 </top-left>
 <width>
-<val>133.0</val>
+<val>160.0</val>
 </width>
 <height>
 <val>70.0</val>
@@ -1329,7 +1329,7 @@ associating them to their use cases.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 251.0, 168.0)</val>
 </matrix>
 <points>
-<val>[(22.972727272727298, 102.0), (15.681818181818187, 8.0)]</val>
+<val>[(27.636363636363683, 102.0), (34.09090909090912, 8.0)]</val>
 </points>
 <head-connection>
 <ref refid="43f65fa6-71b5-11ec-a409-f47b099bf663"/>
@@ -1368,7 +1368,7 @@ associating them to their use cases.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 278.0, 156.0)</val>
 </matrix>
 <points>
-<val>[(205.0, 149.0), (31.0, 0.0)]</val>
+<val>[(205.0, 149.0), (58.0, 0.0)]</val>
 </points>
 <head-connection>
 <ref refid="4ddcc294-71b5-11ec-a409-f47b099bf663"/>
@@ -1407,7 +1407,7 @@ associating them to their use cases.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 428.4296875, 197.5703125)</val>
 </matrix>
 <points>
-<val>[(-133.3828835227273, 72.4296875), (9.289843749999989, 4.4296875)]</val>
+<val>[(-124.44105113636368, 72.4296875), (20.1953125, 4.4296875)]</val>
 </points>
 <head-connection>
 <ref refid="43f65fa6-71b5-11ec-a409-f47b099bf663"/>
@@ -1446,7 +1446,7 @@ associating them to their use cases.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 472.4296875, 195.5703125)</val>
 </matrix>
 <points>
-<val>[(30.435298295454572, 74.4296875), (18.489843749999977, 6.4296875)]</val>
+<val>[(34.46803977272731, 74.4296875), (40.1953125, 6.4296875)]</val>
 </points>
 <head-connection>
 <ref refid="4ddcc294-71b5-11ec-a409-f47b099bf663"/>
@@ -1485,7 +1485,7 @@ associating them to their use cases.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 393.4296875, 306.5703125)</val>
 </matrix>
 <points>
-<val>[(89.5703125, 12.0), (-9.4296875, 12.0)]</val>
+<val>[(89.5703125, 12.0), (17.5703125, 12.0)]</val>
 </points>
 <head-connection>
 <ref refid="4ddcc294-71b5-11ec-a409-f47b099bf663"/>
@@ -1522,114 +1522,13 @@ associating them to their use cases.</val>
 </name>
 <ownedPresentation>
 <reflist>
-<ref refid="b731e062-71b5-11ec-a409-f47b099bf663"/>
-<ref refid="c2033996-71b5-11ec-a409-f47b099bf663"/>
 <ref refid="2d10bd3a-71b6-11ec-a409-f47b099bf663"/>
+<ref refid="c2033996-71b5-11ec-a409-f47b099bf663"/>
+<ref refid="b731e062-71b5-11ec-a409-f47b099bf663"/>
 <ref refid="e76cab04-71b5-11ec-a409-f47b099bf663"/>
 </reflist>
 </ownedPresentation>
 </Diagram>
-<Lifeline id="b731bb32-71b5-11ec-a409-f47b099bf663">
-<coveredBy>
-<reflist>
-<ref refid="e76fcbf4-71b5-11ec-a409-f47b099bf663"/>
-</reflist>
-</coveredBy>
-<interaction>
-<ref refid="b73251a0-71b5-11ec-a409-f47b099bf663"/>
-</interaction>
-<name>
-<val>Primary Actor</val>
-</name>
-<presentation>
-<reflist>
-<ref refid="b731e062-71b5-11ec-a409-f47b099bf663"/>
-</reflist>
-</presentation>
-</Lifeline>
-<LifelineItem id="b731e062-71b5-11ec-a409-f47b099bf663">
-<matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 110.0, 95.0)</val>
-</matrix>
-<top-left>
-<val>(0.0, 0.0)</val>
-</top-left>
-<width>
-<val>100.0</val>
-</width>
-<height>
-<val>50.0</val>
-</height>
-<diagram>
-<ref refid="ad3969b8-71b5-11ec-a409-f47b099bf663"/>
-</diagram>
-<subject>
-<ref refid="b731bb32-71b5-11ec-a409-f47b099bf663"/>
-</subject>
-<lifetime-length>
-<val>314.0</val>
-</lifetime-length>
-</LifelineItem>
-<Interaction id="b73251a0-71b5-11ec-a409-f47b099bf663">
-<lifeline>
-<reflist>
-<ref refid="b731bb32-71b5-11ec-a409-f47b099bf663"/>
-<ref refid="c20319f2-71b5-11ec-a409-f47b099bf663"/>
-</reflist>
-</lifeline>
-<message>
-<reflist>
-<ref refid="e76e3032-71b5-11ec-a409-f47b099bf663"/>
-</reflist>
-</message>
-<name>
-<val>Interaction</val>
-</name>
-<package>
-<ref refid="cccf183a-71b1-11ec-a409-f47b099bf663"/>
-</package>
-</Interaction>
-<Lifeline id="c20319f2-71b5-11ec-a409-f47b099bf663">
-<coveredBy>
-<reflist>
-<ref refid="e911b1fc-71b5-11ec-a409-f47b099bf663"/>
-</reflist>
-</coveredBy>
-<interaction>
-<ref refid="b73251a0-71b5-11ec-a409-f47b099bf663"/>
-</interaction>
-<name>
-<val>Actor Profile</val>
-</name>
-<presentation>
-<reflist>
-<ref refid="c2033996-71b5-11ec-a409-f47b099bf663"/>
-</reflist>
-</presentation>
-</Lifeline>
-<LifelineItem id="c2033996-71b5-11ec-a409-f47b099bf663">
-<matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 310.0, 95.0)</val>
-</matrix>
-<top-left>
-<val>(0.0, 0.0)</val>
-</top-left>
-<width>
-<val>100.0</val>
-</width>
-<height>
-<val>50.0</val>
-</height>
-<diagram>
-<ref refid="ad3969b8-71b5-11ec-a409-f47b099bf663"/>
-</diagram>
-<subject>
-<ref refid="c20319f2-71b5-11ec-a409-f47b099bf663"/>
-</subject>
-<lifetime-length>
-<val>314.0</val>
-</lifetime-length>
-</LifelineItem>
 <MessageItem id="e76cab04-71b5-11ec-a409-f47b099bf663">
 <diagram>
 <ref refid="ad3969b8-71b5-11ec-a409-f47b099bf663"/>
@@ -1653,41 +1552,6 @@ associating them to their use cases.</val>
 <ref refid="c2033996-71b5-11ec-a409-f47b099bf663"/>
 </tail-connection>
 </MessageItem>
-<Message id="e76e3032-71b5-11ec-a409-f47b099bf663">
-<interaction>
-<ref refid="b73251a0-71b5-11ec-a409-f47b099bf663"/>
-</interaction>
-<name>
-<val>login</val>
-</name>
-<presentation>
-<reflist>
-<ref refid="e76cab04-71b5-11ec-a409-f47b099bf663"/>
-</reflist>
-</presentation>
-<receiveEvent>
-<ref refid="e911b1fc-71b5-11ec-a409-f47b099bf663"/>
-</receiveEvent>
-<sendEvent>
-<ref refid="e76fcbf4-71b5-11ec-a409-f47b099bf663"/>
-</sendEvent>
-</Message>
-<MessageOccurrenceSpecification id="e76fcbf4-71b5-11ec-a409-f47b099bf663">
-<covered>
-<ref refid="b731bb32-71b5-11ec-a409-f47b099bf663"/>
-</covered>
-<sendMessage>
-<ref refid="e76e3032-71b5-11ec-a409-f47b099bf663"/>
-</sendMessage>
-</MessageOccurrenceSpecification>
-<MessageOccurrenceSpecification id="e911b1fc-71b5-11ec-a409-f47b099bf663">
-<covered>
-<ref refid="c20319f2-71b5-11ec-a409-f47b099bf663"/>
-</covered>
-<receiveMessage>
-<ref refid="e76e3032-71b5-11ec-a409-f47b099bf663"/>
-</receiveMessage>
-</MessageOccurrenceSpecification>
 <Comment id="098cef6e-71b6-11ec-a409-f47b099bf663">
 <body>
 <val>Prepare package dependencies diagram to group your implementation classes in appropriate way. This will help you maintain the code well structured and avoid design flaws such as cyclic dependencies or dependencies on unstable parts</val>
@@ -1709,7 +1573,7 @@ associating them to their use cases.</val>
 <val>271.5703125</val>
 </width>
 <height>
-<val>129.0</val>
+<val>146.0</val>
 </height>
 <diagram>
 <ref refid="37edd9b4-71b5-11ec-a409-f47b099bf663"/>
@@ -2551,8 +2415,8 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="608fe206-3391-11ed-87db-df97d3292610"/>
 <ref refid="a7b1e66a-33e3-11ed-9925-df97d3292610"/>
 <ref refid="aa63e622-3bee-11ed-9bda-7db7610802e2"/>
-<ref refid="f5b6b27b-33db-11ed-8de1-df97d3292610"/>
 <ref refid="2dabbb54-338f-11ed-8e24-df97d3292610"/>
+<ref refid="f5b6b27b-33db-11ed-8de1-df97d3292610"/>
 <ref refid="d69c184a-3bee-11ed-b9f1-7db7610802e2"/>
 <ref refid="02b17967-3bef-11ed-b5ed-7db7610802e2"/>
 <ref refid="0053fed1-3390-11ed-87f8-df97d3292610"/>
@@ -2763,7 +2627,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <val>(1.0, 0.0, 0.0, 1.0, 800.0, 327.0)</val>
 </matrix>
 <points>
-<val>[(186.82148528000346, -19.876752425588506), (382.65503403355206, 45.60714285714289)]</val>
+<val>[(170.31818314261923, -81.69382536619275), (382.65503403355206, 45.60714285714289)]</val>
 </points>
 <head-connection>
 <ref refid="1a99311e-338f-11ed-8bfa-df97d3292610"/>
@@ -4596,4 +4460,140 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="02b13d97-3bef-11ed-8d2d-7db7610802e2"/>
 </subject>
 </PackageItem>
+<Interaction id="b73251a0-71b5-11ec-a409-f47b099bf663">
+<lifeline>
+<reflist>
+<ref refid="c20319f2-71b5-11ec-a409-f47b099bf663"/>
+<ref refid="b731bb32-71b5-11ec-a409-f47b099bf663"/>
+</reflist>
+</lifeline>
+<message>
+<reflist>
+<ref refid="e76e3032-71b5-11ec-a409-f47b099bf663"/>
+</reflist>
+</message>
+<name>
+<val>Interaction</val>
+</name>
+<package>
+<ref refid="cccf183a-71b1-11ec-a409-f47b099bf663"/>
+</package>
+</Interaction>
+<Lifeline id="c20319f2-71b5-11ec-a409-f47b099bf663">
+<coveredBy>
+<reflist>
+<ref refid="e911b1fc-71b5-11ec-a409-f47b099bf663"/>
+</reflist>
+</coveredBy>
+<interaction>
+<ref refid="b73251a0-71b5-11ec-a409-f47b099bf663"/>
+</interaction>
+<name>
+<val>Actor Profile</val>
+</name>
+<presentation>
+<reflist>
+<ref refid="c2033996-71b5-11ec-a409-f47b099bf663"/>
+</reflist>
+</presentation>
+</Lifeline>
+<LifelineItem id="c2033996-71b5-11ec-a409-f47b099bf663">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 310.0, 95.0)</val>
+</matrix>
+<top-left>
+<val>(0.0, 0.0)</val>
+</top-left>
+<width>
+<val>100.0</val>
+</width>
+<height>
+<val>50.0</val>
+</height>
+<diagram>
+<ref refid="ad3969b8-71b5-11ec-a409-f47b099bf663"/>
+</diagram>
+<subject>
+<ref refid="c20319f2-71b5-11ec-a409-f47b099bf663"/>
+</subject>
+<lifetime-length>
+<val>414.0</val>
+</lifetime-length>
+</LifelineItem>
+<Message id="e76e3032-71b5-11ec-a409-f47b099bf663">
+<interaction>
+<ref refid="b73251a0-71b5-11ec-a409-f47b099bf663"/>
+</interaction>
+<name>
+<val>login</val>
+</name>
+<presentation>
+<reflist>
+<ref refid="e76cab04-71b5-11ec-a409-f47b099bf663"/>
+</reflist>
+</presentation>
+<receiveEvent>
+<ref refid="e911b1fc-71b5-11ec-a409-f47b099bf663"/>
+</receiveEvent>
+<sendEvent>
+<ref refid="e76fcbf4-71b5-11ec-a409-f47b099bf663"/>
+</sendEvent>
+</Message>
+<Lifeline id="b731bb32-71b5-11ec-a409-f47b099bf663">
+<coveredBy>
+<reflist>
+<ref refid="e76fcbf4-71b5-11ec-a409-f47b099bf663"/>
+</reflist>
+</coveredBy>
+<interaction>
+<ref refid="b73251a0-71b5-11ec-a409-f47b099bf663"/>
+</interaction>
+<name>
+<val>Primary Actor</val>
+</name>
+<presentation>
+<reflist>
+<ref refid="b731e062-71b5-11ec-a409-f47b099bf663"/>
+</reflist>
+</presentation>
+</Lifeline>
+<LifelineItem id="b731e062-71b5-11ec-a409-f47b099bf663">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 110.0, 95.0)</val>
+</matrix>
+<top-left>
+<val>(0.0, 0.0)</val>
+</top-left>
+<width>
+<val>100.0</val>
+</width>
+<height>
+<val>50.0</val>
+</height>
+<diagram>
+<ref refid="ad3969b8-71b5-11ec-a409-f47b099bf663"/>
+</diagram>
+<subject>
+<ref refid="b731bb32-71b5-11ec-a409-f47b099bf663"/>
+</subject>
+<lifetime-length>
+<val>414.0</val>
+</lifetime-length>
+</LifelineItem>
+<MessageOccurrenceSpecification id="e76fcbf4-71b5-11ec-a409-f47b099bf663">
+<covered>
+<ref refid="b731bb32-71b5-11ec-a409-f47b099bf663"/>
+</covered>
+<sendMessage>
+<ref refid="e76e3032-71b5-11ec-a409-f47b099bf663"/>
+</sendMessage>
+</MessageOccurrenceSpecification>
+<MessageOccurrenceSpecification id="e911b1fc-71b5-11ec-a409-f47b099bf663">
+<covered>
+<ref refid="c20319f2-71b5-11ec-a409-f47b099bf663"/>
+</covered>
+<receiveMessage>
+<ref refid="e76e3032-71b5-11ec-a409-f47b099bf663"/>
+</receiveMessage>
+</MessageOccurrenceSpecification>
 </gaphor>
