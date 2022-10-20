@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
+import { useSelector } from 'react-redux';
 
 // ----------------------------------------------------------------------
 
@@ -34,6 +35,16 @@ const MainStyle = styled('div')(({ theme }) => ({
 
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(user);
+    console.log(localStorage.getItem("user"));
+    if (!user) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate, user]);
 
   return (
     <RootStyle>

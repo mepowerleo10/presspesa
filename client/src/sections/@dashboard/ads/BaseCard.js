@@ -10,6 +10,7 @@ import {
   Avatar,
   Typography,
   CardContent,
+  IconButton,
 } from "@mui/material";
 // utils
 import { fDate } from "../../../utils/formatTime";
@@ -17,6 +18,7 @@ import { fShortenNumber } from "../../../utils/formatNumber";
 //
 import SvgIconStyle from "../../../components/SvgIconStyle";
 import Iconify from "../../../components/Iconify";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 
 // ----------------------------------------------------------------------
 
@@ -48,9 +50,12 @@ const InfoStyle = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
   marginTop: theme.spacing(3),
   color: theme.palette.text.disabled,
+  zIndex: 8,
+  left: theme.spacing(3),
+  bottom: theme.spacing(-2),
 }));
 
-const CoverImgStyle = styled("img")({
+const CoverImgStyle = styled("div")({
   top: 0,
   width: "100%",
   height: "100%",
@@ -60,12 +65,18 @@ const CoverImgStyle = styled("img")({
 
 // ----------------------------------------------------------------------
 
-AdCard.propTypes = {
+ImageCard.propTypes = {
   post: PropTypes.object.isRequired,
   index: PropTypes.number,
 };
 
-export default function AdCard({ post, index }) {
+export default function ImageCard({
+  post,
+  index,
+  media,
+  displayValue,
+  togglePlay,
+}) {
   const { cover, title, view, comment, share, author, createdAt } = post;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
@@ -78,6 +89,7 @@ export default function AdCard({ post, index }) {
   return (
     <Grid item xs={12} sm={12} md={12}>
       <Card
+        onClick={() => togglePlay()}
         sx={{
           position: "relative",
           mx: {
@@ -95,7 +107,7 @@ export default function AdCard({ post, index }) {
                 width: "100%",
                 height: "100%",
                 position: "absolute",
-                bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
+                // bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
               },
             },
             ...{
@@ -129,11 +141,17 @@ export default function AdCard({ post, index }) {
                 left: 24,
                 width: 40,
                 height: 40,
+                display: displayValue,
               },
             }}
           />
 
-          <CoverImgStyle alt={title} src={cover} />
+          <CoverImgStyle alt={title} src={cover} children={media} />
+          <IconButton
+            sx={{ position: "absolute", top: "45%", left: "45%", zIndex: 1, display: displayValue }}
+          >
+            <PlayCircleOutlineIcon fontSize="large" color="white" />
+          </IconButton>
         </CardMediaStyle>
 
         <CardContent
@@ -146,14 +164,6 @@ export default function AdCard({ post, index }) {
             },
           }}
         >
-          <Typography
-            gutterBottom
-            variant="caption"
-            sx={{ color: "text.disabled", display: "block" }}
-          >
-            {fDate(createdAt)}
-          </Typography>
-
           <TitleStyle
             to="#"
             color="inherit"
@@ -165,6 +175,7 @@ export default function AdCard({ post, index }) {
               ...{
                 color: "common.white",
               },
+              display: displayValue,
             }}
           >
             {title}
