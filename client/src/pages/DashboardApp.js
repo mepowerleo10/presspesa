@@ -11,13 +11,23 @@ import {
   AppWebsiteVisits,
   AppWidgetSummary,
 } from "../sections/@dashboard/app";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
   const theme = useTheme();
-  const user = useSelector((state) => state.session.user);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(user);
+    console.log(localStorage.getItem("user"));
+    if (!user) {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate, user]);
 
   return (
     <Page title="Dashboard">

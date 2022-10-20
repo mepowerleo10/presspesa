@@ -11,8 +11,9 @@ import Logo from "../components/Logo";
 import { LoginForm } from "../sections/auth/login";
 import AuthSocial from "../sections/auth/AuthSocial";
 import constants from "src/components/constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { sessionActions } from "src/store";
 
 // ----------------------------------------------------------------------
 
@@ -63,17 +64,9 @@ export default function Login() {
   const smUp = useResponsive("up", "sm");
   const mdUp = useResponsive("up", "md");
 
-  const navigate = useNavigate();
-  const user = useSelector((state) => state.session.user);
   const partialRegistration = useSelector(
     (state) => state.session.partialRegistration
   );
-
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard/app");
-    }
-  }, [navigate, user]);
 
   return (
     <Page title="Login">

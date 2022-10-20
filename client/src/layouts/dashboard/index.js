@@ -35,14 +35,16 @@ const MainStyle = styled('div')(({ theme }) => ({
 
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
-  const user = useSelector((state) => state.session.user)
+  const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(user);
+    console.log(localStorage.getItem("user"));
     if (!user) {
-      navigate("/login");
+      navigate("/login", { replace: true });
     }
-  }, [navigate, user])
+  }, [navigate, user]);
 
   return (
     <RootStyle>

@@ -40,7 +40,7 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const anchorRef = useRef(null);
 
-  const user = useSelector((state) => state.session.user);
+  const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
 
   const [open, setOpen] = useState(null);
@@ -52,6 +52,7 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(null);
     dispatch(sessionActions.updateUser(null));
+    localStorage.removeItem("user");
     signOut(auth);
   };
 

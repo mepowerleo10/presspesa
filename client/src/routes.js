@@ -22,7 +22,7 @@ export default function Router() {
         { path: "app", element: <DashboardApp /> },
         { path: "payments", element: <Payments /> },
         { path: "products", element: <Products /> },
-        { path: "ads", element: <Ads /> },
+        { path: "", element: <Ads /> },
       ],
     },
     {
