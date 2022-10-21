@@ -10,7 +10,7 @@ import { LoadingButton } from "@mui/lab";
 
 import { FormProvider, RHFTextField } from "../../../components/hook-form";
 import { useDispatch } from "react-redux";
-import { registrationActions, sessionActions } from "src/store";
+import { errorsActions, registrationActions, sessionActions } from "src/store";
 import Iconify from "src/components/Iconify";
 import RHFPhoneField from "src/components/hook-form/RHFPhoneField";
 
@@ -30,6 +30,8 @@ export default function RegisterForm() {
   const auth = getAuth();
 
   const [emailExists, setEmailExists] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -80,7 +82,8 @@ export default function RegisterForm() {
     user.password = methods.getValues().password;
 
     if (user.password === methods.getValues().password_confirm) {
-      createUserWithEmailAndPassword(auth, user.email, user.password).then(
+      await setIsLoading(true);
+      await createUserWithEmailAndPassword(auth, user.email, user.password).then(
         (userCredential) => {
           updateProfile(auth.currentUser, {
             email: user.email,
@@ -92,14 +95,15 @@ export default function RegisterForm() {
               }).then(() => {
                 dispatch(sessionActions.updateUser(user));
                 navigate("/login", { replace: true });
-              });
+              }).catch((error) => dispatch(errorsActions.push(error.message)))
             })
             .catch((error) => {
-              console.log(error);
               setEmailExists(true);
+              dispatch(errorsActions.push("Email already exists, please use another email address!"));
             });
         }
       );
+      await setIsLoading(false);
     }
   };
 
@@ -157,7 +161,7 @@ export default function RegisterForm() {
           size="large"
           type="submit"
           variant="contained"
-          loading={isSubmitting}
+          loading={isLoading}
         >
           Register
         </LoadingButton>

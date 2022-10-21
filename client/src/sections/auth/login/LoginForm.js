@@ -15,7 +15,7 @@ import {
 } from "../../../components/hook-form";
 import { auth, db } from "src/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { sessionActions } from "src/store";
+import {  errorsActions, sessionActions } from "src/store";
 import Iconify from "src/components/Iconify";
 import { doc, getDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
@@ -25,6 +25,8 @@ export default function LoginForm() {
   const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("Invalid email/password");
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -44,8 +46,9 @@ export default function LoginForm() {
     defaultValues,
   });
 
-  const login = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password).then(async (result) => {
+  const login = async (email, password) => {
+    setIsLoading(true);
+    await signInWithEmailAndPassword(auth, email, password).then(async (result) => {
       const user = {
         uid: result.user.uid,
         phoneNumber: result.user.phoneNumber,
@@ -56,15 +59,22 @@ export default function LoginForm() {
       };
 
       const docRef = doc(db, "users", user.uid);
-      await getDoc(docRef).then((doc) => {
-        //  user.firstName = docSnap.data();
-        console.log(doc);
+      await getDoc(docRef)
+        .then((doc) => {
+          //  user.firstName = docSnap.data();
+          console.log(doc);
 
-        dispatch(sessionActions.updateUser(user));
-        updateUserInLocalStorage(user);
-        navigate("/dashboard/");
-      });
+          dispatch(sessionActions.updateUser(user));
+          updateUserInLocalStorage(user);
+          navigate("/dashboard/");
+        })
+        .catch((error) => {
+          dispatch(errorsActions.push(errorMessage));
+        });
+    }).catch((error) => {
+      dispatch(errorsActions.push(errorMessage));
     });
+    setIsLoading(false);
   };
 
   const {
@@ -75,9 +85,11 @@ export default function LoginForm() {
   return (
     <FormProvider
       methods={methods}
-      onSubmit={handleSubmit(
-        login(methods.getValues().email, methods.getValues().password)
-      )}
+      onSubmit={handleSubmit(() => {
+        setIsLoading(true);
+        login(methods.getValues().email, methods.getValues().password);
+        setIsLoading(false);
+      })}
     >
       <Stack spacing={3}>
         <RHFTextField name="email" label="Email address" />
@@ -120,7 +132,7 @@ export default function LoginForm() {
         size="large"
         type="submit"
         variant="contained"
-        loading={isSubmitting}
+        loading={isLoading}
       >
         Login
       </LoadingButton>

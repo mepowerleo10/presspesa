@@ -6,6 +6,7 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
 //
 import Iconify from './Iconify';
+import { useTranslation } from './LocalizationProvider';
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +37,7 @@ NavItem.propTypes = {
 
 function NavItem({ item, active }) {
   const theme = useTheme();
+  const t = useTranslation();
 
   const isActiveRoot = active(item.path);
 
@@ -110,7 +112,7 @@ function NavItem({ item, active }) {
                       }}
                     />
                   </ListItemIconStyle>
-                  <ListItemText disableTypography primary={title} />
+                  <ListItemText disableTypography primary={t(item.title)} />
                 </ListItemStyle>
               );
             })}
@@ -129,7 +131,7 @@ function NavItem({ item, active }) {
       }}
     >
       <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
-      <ListItemText disableTypography primary={title} />
+      <ListItemText disableTypography primary={t(item.title)} />
       {info && info}
     </ListItemStyle>
   );
