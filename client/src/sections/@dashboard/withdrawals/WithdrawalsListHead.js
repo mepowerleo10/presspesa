@@ -16,7 +16,7 @@ const visuallyHidden = {
   clip: 'rect(0 0 0 0)',
 };
 
-PaymentsListHead.propTypes = {
+WithdrawalsListHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']),
   orderBy: PropTypes.string,
   rowCount: PropTypes.number,
@@ -26,7 +26,7 @@ PaymentsListHead.propTypes = {
   onSelectAllClick: PropTypes.func,
 };
 
-export default function PaymentsListHead({
+export default function WithdrawalsListHead({
   order,
   orderBy,
   rowCount,

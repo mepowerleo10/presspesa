@@ -29,13 +29,13 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-PaymentsListToolbar.propTypes = {
+WithdrawalsListToolbar.propTypes = {
   numSelected: PropTypes.number,
   filterName: PropTypes.string,
   onFilterName: PropTypes.func,
 };
 
-export default function PaymentsListToolbar({ numSelected, filterName, onFilterName }) {
+export default function WithdrawalsListToolbar({ numSelected, filterName, onFilterName }) {
   return (
     <RootStyle
       sx={{

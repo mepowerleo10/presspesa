@@ -7,22 +7,22 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
 const navConfig = [
   {
-    title: 'dashboard',
+    title: 'sharedDashboard',
     path: '/dashboard/app',
     icon: getIcon('eva:pie-chart-2-fill'),
   },
   {
-    title: 'ads',
+    title: 'sharedAds',
     path: '/dashboard/ads',
     icon: getIcon('eva:file-text-fill'),
   },
   {
-    title: 'payments',
-    path: '/dashboard/payments',
+    title: 'sharedWithdrawals',
+    path: '/dashboard/withdrawals',
     icon: getIcon('eva:credit-card-fill'),
   },
   {
-    title: 'Not found',
+    title: 'sharedNotFound',
     path: '/404',
     icon: getIcon('eva:alert-triangle-fill'),
   },
