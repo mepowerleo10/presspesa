@@ -5,10 +5,12 @@ import React, {
   import 'moment/min/locales.min';
   
   import en from '../resources/l10n/en.json';
+  import sw from '../resources/l10n/sw.json';
   import usePersistedState from 'src/utils/usePersistedState';
   
   const languages = {
-    en: { data: en, name: 'English' },
+    en: { data: en, name: 'English', icon: "/static/icons/ic_flag_uk.svg", },
+    sw: { data: sw, name: 'Swahili', icon: "/static/icons/ic_flag_tz.svg" },
   };
   
   const getDefaultLanguage = () => {
