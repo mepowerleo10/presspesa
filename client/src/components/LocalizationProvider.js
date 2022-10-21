@@ -43,7 +43,7 @@ import React, {
   export const LocalizationProvider = ({ children }) => {
     const [language, setLanguage] = usePersistedState('language', getDefaultLanguage());
   
-    const value = useMemo(() => ({ languages, language, setLanguage }), [languages, language, setLanguage]);
+    const value = useMemo(() => ({ languages, language, setLanguage }), [language, setLanguage]);
   
     useEffect(() => {
       let selected;

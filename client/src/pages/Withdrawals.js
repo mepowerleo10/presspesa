@@ -34,9 +34,9 @@ import WithdrawalsListToolbar from 'src/sections/@dashboard/withdrawals/Withdraw
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'date', label: 'Date', alignRight: false },
-  { id: 'amount', label: 'Amount', alignRight: false },
+  // { id: 'company', label: 'Company', alignRight: false },
+  { id: 'date', label: "sharedDate", alignRight: false },
+  { id: 'amount', label: "sharedAmount", alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
@@ -175,7 +175,7 @@ export default function Withdrawals() {
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, company)} />
                         </TableCell>
-                        <TableCell align="left">{company}</TableCell>
+                        {/* <TableCell align="left">{company}</TableCell> */}
                         <TableCell align="left">
                           {moment(date).fromNow().toString()}
                         </TableCell>

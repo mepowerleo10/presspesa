@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 // material
 import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel } from '@mui/material';
+import { useTranslation } from 'src/components/LocalizationProvider';
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +40,9 @@ export default function WithdrawalsListHead({
     onRequestSort(event, property);
   };
 
+  const t = useTranslation();
+
+
   return (
     <TableHead>
       <TableRow>
@@ -61,9 +65,9 @@ export default function WithdrawalsListHead({
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              {t(headCell.label)}
               {orderBy === headCell.id ? (
-                <Box sx={{ ...visuallyHidden }}>{order === 'desc' ? 'sorted descending' : 'sorted ascending'}</Box>
+                <Box sx={{ ...visuallyHidden }}>{`${t("sharedSorted")} ${order === 'desc' ? t('sharedDescending') : t('sharedAscending')}`}</Box>
               ) : null}
             </TableSortLabel>
           </TableCell>

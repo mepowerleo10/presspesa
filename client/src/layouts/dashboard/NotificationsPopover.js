@@ -25,6 +25,7 @@ import { fToNow } from '../../utils/formatTime';
 import Iconify from '../../components/Iconify';
 import Scrollbar from '../../components/Scrollbar';
 import MenuPopover from '../../components/MenuPopover';
+import { useTranslation } from 'src/components/LocalizationProvider';
 
 // ----------------------------------------------------------------------
 
@@ -60,6 +61,7 @@ const NOTIFICATIONS = [
 
 export default function NotificationsPopover() {
   const anchorRef = useRef(null);
+  const t = useTranslation();
 
   const [notifications, setNotifications] = useState(NOTIFICATIONS);
 
@@ -105,7 +107,7 @@ export default function NotificationsPopover() {
       >
         <Box sx={{ display: 'flex', alignItems: 'center', py: 2, px: 2.5 }}>
           <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="subtitle1">Notifications</Typography>
+            <Typography variant="subtitle1">{t("sharedNotifications")}</Typography>
           </Box>
 
           {totalUnRead > 0 && (
@@ -124,7 +126,7 @@ export default function NotificationsPopover() {
             disablePadding
             subheader={
               <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                New
+                {t("sharedNew")}
               </ListSubheader>
             }
           >
@@ -137,7 +139,7 @@ export default function NotificationsPopover() {
             disablePadding
             subheader={
               <ListSubheader disableSticky sx={{ py: 1, px: 2.5, typography: 'overline' }}>
-                Before that
+                {t("sharedBeforeThat")}
               </ListSubheader>
             }
           >
@@ -151,7 +153,7 @@ export default function NotificationsPopover() {
 
         <Box sx={{ p: 1 }}>
           <Button fullWidth disableRipple>
-            View All
+            {t("sharedViewAll")}
           </Button>
         </Box>
       </MenuPopover>
