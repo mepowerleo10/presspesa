@@ -27,5 +27,18 @@
     "sharedBeforeThat": "Before that",
     "sharedViewAll": "View All",
     "sharedSearch": "Search ...",
-    "sharedSelected": "selected"
+    "sharedSelected": "selected",
+    "loginDontHaveAnAccount": "Don’t have an account? ",
+    "loginGetStarted": "Get started",
+    "loginSignInTo": "Sign in to",
+    "loginEnterYourDetailsBelow": "Enter your details below.",
+    "sharedEmailMustBeValid": "Email must be a valid email address",
+    "sharedEmailIsRequired": "Email is required",
+    "sharedPasswordIsRequired": "Password is required",
+    "sharedEmailAddress": "Email address",
+    "sharedPassword": "Password",
+    "sharedForgotPassword": "Forgot password?",
+    "sharedLogin": "Login",
+    "sharedRememberMe": "Remember me",
+    "sharedInvalidEmailPassword": "Invalid email/password"
 }

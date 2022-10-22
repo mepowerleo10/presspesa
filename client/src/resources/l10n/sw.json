@@ -28,6 +28,18 @@
     "sharedBeforeThat": "Hapo Nyuma",
     "sharedViewAll": "Zote",
     "sharedSearch": "Tafuta ...",
-    "sharedSelected": "zimechaguliwa"
-
+    "sharedSelected": "zimechaguliwa",
+    "loginDontHaveAnAccount": "Huna akaunti? ",
+    "loginGetStarted": "Fungua Akaunti",
+    "loginSignInTo": "Ingia kwenye",
+    "loginEnterYourDetailsBelow": "Jaza taarifa zako hapa.",
+    "sharedEmailMustBeValid": "Hakikisha barua pepe ni sahihi",
+    "sharedEmailIsRequired": "Barua pepe inatakiwa",
+    "sharedPasswordIsRequired": "Neno siri linahitajika",
+    "sharedEmailAddress": "Barua Pepe",
+    "sharedPassword": "Neno siri",
+    "sharedForgotPassword": "Umesahau neno siri?",
+    "sharedLogin": "Ingia",
+    "sharedRememberMe": "Nikumbuke",
+    "sharedInvalidEmailPassword": "Barua pepe au neno siri sio sahihi"
 }

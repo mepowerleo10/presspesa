@@ -1,7 +1,7 @@
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 // @mui
 import { styled } from "@mui/material/styles";
-import { Card, Link, Container, Typography } from "@mui/material";
+import { Card, Link, Container, Typography, Grid } from "@mui/material";
 // hooks
 import useResponsive from "../hooks/useResponsive";
 // components
@@ -14,6 +14,8 @@ import constants from "src/components/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { sessionActions } from "src/store";
+import { useTranslation } from "src/components/LocalizationProvider";
+import LanguagePopover from "src/layouts/dashboard/LanguagePopover";
 
 // ----------------------------------------------------------------------
 
@@ -63,6 +65,7 @@ const ContentStyle = styled("div")(({ theme }) => ({
 export default function Login() {
   const smUp = useResponsive("up", "sm");
   const mdUp = useResponsive("up", "md");
+  const t = useTranslation();
 
   const partialRegistration = useSelector(
     (state) => state.session.partialRegistration
@@ -76,9 +79,9 @@ export default function Login() {
 
           {smUp && (
             <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-              Don’t have an account? {""}
+              {t("loginDontHaveAnAccount")} {""}
               <Link variant="subtitle2" component={RouterLink} to="/register">
-                Get started
+                {t("loginGetStarted")}
               </Link>
             </Typography>
           )}
@@ -91,24 +94,35 @@ export default function Login() {
                 Continue your registration with your phone number
               </Typography>
             )) || (
-              <Typography variant="h4" gutterBottom>
-                Sign in to {constants.companyName}
-              </Typography>
+              <Grid
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item xs={10}>
+                  <Typography variant="h4" gutterBottom>
+                    {t("loginSignInTo")} {constants.companyName}
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <LanguagePopover />
+                </Grid>
+              </Grid>
             )}
 
             <Typography sx={{ color: "text.secondary", mb: 5 }}>
-              Enter your details below.
+              {t("loginEnterYourDetailsBelow")}
             </Typography>
 
             {/* <AuthSocial /> */}
 
             <LoginForm />
-
             {!smUp && (
               <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-                Don’t have an account?{" "}
+                {t("loginDontHaveAnAccount")}{" "}
                 <Link variant="subtitle2" component={RouterLink} to="/register">
-                  Get started
+                  {t("loginGetStarted")}
                 </Link>
               </Typography>
             )}
