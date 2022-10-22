@@ -21,7 +21,7 @@ const ErrorHandler = () => {
     <Snackbar
       open={!!error}
       anchorOrigin={{
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "center",
       }}
     >
