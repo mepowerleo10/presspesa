@@ -18,7 +18,7 @@ class Address(models.Model):
 
     def __str__(self):
         """Unicode representation of Address."""
-        pass
+        return f'{self.house_no}, {self.street}'
 
 
 class Company(models.Model):
@@ -27,7 +27,7 @@ class Company(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     name = models.CharField("Name", max_length=50)
     web_url = models.URLField("Web Page", blank=True, null=True)
-    date_joined = models.DateTimeField("Date Joined", auto_created=True)
+    date_joined = models.DateTimeField("Date Joined", auto_created=True, auto_now_add=True)
     is_active = models.BooleanField("Active")
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
 
@@ -39,7 +39,7 @@ class Company(models.Model):
 
     def __str__(self):
         """Unicode representation of Company."""
-        pass
+        return self.name
 
 
 class Campaign(models.Model):
@@ -62,7 +62,7 @@ class Campaign(models.Model):
 
     def __str__(self):
         """Unicode representation of Campaign."""
-        pass
+        return self.name
 
 
 class Zone(models.Model):
@@ -83,7 +83,7 @@ class Zone(models.Model):
 
     def __str__(self):
         """Unicode representation of Zone."""
-        pass
+        return self.name
 
 
 class Token(models.Model):
@@ -104,7 +104,7 @@ class Token(models.Model):
 
     def __str__(self):
         """Unicode representation of Token."""
-        pass
+        return f'{self.offered_by}'
 
 
 class Advertisement(models.Model):
@@ -126,7 +126,7 @@ class Advertisement(models.Model):
 
     def __str__(self):
         """Unicode representation of Advertisement."""
-        pass
+        return self.title
 
 
 class Media(models.Model):
@@ -145,10 +145,6 @@ class Media(models.Model):
             verbose_name = "MediaTypes"
             verbose_name_plural = "MediaTypess"
 
-        def __str__(self):
-            """Unicode representation of MediaTypes."""
-            pass
-
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     media_title = models.CharField(max_length=50)
     media_description = models.TextField(max_length=100)
@@ -163,4 +159,4 @@ class Media(models.Model):
 
     def __str__(self):
         """Unicode representation of Media."""
-        pass
+        return self.media_title
