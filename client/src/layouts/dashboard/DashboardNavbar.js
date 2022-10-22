@@ -74,7 +74,7 @@ export default function DashboardNavbar({ onOpenSidebar }) {
 
         <Searchbar />
         <Box sx={{ flexGrow: 1 }} />
-        <Box sx={{ my: "auto", ml: 14, }}>
+        <Box sx={{ my: "auto", mx: "auto" }}>
           <Link underline="none" component={RouterLink} to="#">
             <WalletStyle>
               <Icon>
