@@ -45,6 +45,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         # "rest_framework_simplejwt.authentication.JWTAuthentication",
         # "firebase_auth.authentication.FirebaseAuthentication"
+    ),
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
 }
 
@@ -134,7 +135,7 @@ TIME_ZONE = "Africa/Dar_es_Salaam"
 
 USE_I18N = True
 
-USE_TZ = Truesssssssssssssssssssssssssssssssssssssssssss
+USE_TZ = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
