@@ -208,7 +208,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 MEDIA_URL = "/media/"
 
 # Path where media files are stored
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_ROOT = "/srv/http/streaming/"
 
 # Celery settings
 CELERY_BROKER_URL = "redis://localhost:6379"

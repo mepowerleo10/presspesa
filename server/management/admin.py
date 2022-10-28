@@ -17,6 +17,10 @@ class CampaignAdmin(admin.ModelAdmin):
     ordering = ('',) """
 
 
+class CampaignInline(admin.TabularInline):
+    model = Campaign
+
+
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     inlines = [CampaignInline]

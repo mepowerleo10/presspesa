@@ -21,14 +21,3 @@ class AdvertisementAdmin(admin.ModelAdmin):
 @admin.register(Media)
 class MediaAdmin(admin.ModelAdmin):
     '''Admin View for Media'''
-
-    """ list_display = ('',)
-    list_filter = ('',)
-    inlines = [
-        Inline,
-    ]
-    raw_id_fields = ('',)
-    readonly_fields = ('',)
-    search_fields = ('',)
-    date_hierarchy = ''
-    ordering = ('',) """
