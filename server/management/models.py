@@ -19,7 +19,7 @@ class Address(models.Model):
 
     def __str__(self):
         """Unicode representation of Address."""
-        pass
+        return f'{self.house_no}, {self.street}'
 
 
 class Company(models.Model):
@@ -28,7 +28,7 @@ class Company(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     name = models.CharField("Name", max_length=50)
     web_url = models.URLField("Web Page", blank=True, null=True)
-    date_joined = models.DateTimeField("Date Joined", auto_created=True)
+    date_joined = models.DateTimeField("Date Joined", auto_created=True, auto_now_add=True)
     is_active = models.BooleanField("Active")
     address = models.CharField(max_length=120)
 
@@ -107,8 +107,7 @@ class Token(models.Model):
 
     def __str__(self):
         """Unicode representation of Token."""
-        pass
-
+        return f'{self.offered_by}'
 
 class Media(models.Model):
     """Model definition for Media."""
@@ -143,7 +142,6 @@ class Media(models.Model):
     def __str__(self):
         """Unicode representation of Media."""
         return self.media_title
-
 
 class Advertisement(models.Model):
     """Model definition for Advertisement."""
