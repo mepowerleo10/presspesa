@@ -1,5 +1,5 @@
 from django.urls import path
-from management.views import CompanyDetails, CompanyList, TokenList, TokenDetails, CampainList, CampainDetails
+from management.views import CompanyDetails, CompanyList, TokenList, TokenDetails, CampaignList, CampaignDetails
 
 urlpatterns = [
     # Company endpoints
@@ -11,8 +11,8 @@ urlpatterns = [
     path('token/<int:pk>/', TokenDetails.as_view(), name='token_details'), # Endpoint for retrieving , update or delete a token instance
 
     # Token Endpoints
-    path('campain/', CampainList.as_view(), name='campains'), # Endpoint for listing all tokens
-    path('campain/<int:pk>/', CampainDetails.as_view(), name='campain_details'), # Endpoint for retrieving , update or delete a token instance
+    path('campaign/', CampaignList.as_view(), name='campaigns'), # Endpoint for listing all tokens
+    path('campaign/<int:pk>/', CampaignDetails.as_view(), name='campaign_details'), # Endpoint for retrieving , update or delete a token instance
 
 
 ]

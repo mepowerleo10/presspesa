@@ -62,10 +62,10 @@ class TokenDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Token.objects.all()
     serializer_class = TokenSerializer
 
-class CampainList(generics.ListCreateAPIView):
+class CampaignList(generics.ListCreateAPIView):
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
 
-class CampainDetails(generics.RetrieveUpdateDestroyAPIView):
+class CampaingDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
