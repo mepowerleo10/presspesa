@@ -15,7 +15,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = "django-insecure-jp5l0-=n3lcffsr+bbf+p$f#&v*xei28jlw=o16&w6mz0-h27t"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -76,6 +76,8 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+X_FRAME_OPTIONS = "ALLOWALL"
+XS_SHARING_ALLOWED_METHODS = ["POST", "GET", "OPTIONS", "PUT", "DELETE"]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -137,10 +139,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-X_FRAME_OPTIONS = "ALLOWALL"
-XS_SHARING_ALLOWED_METHODS = ["POST", "GET", "OPTIONS", "PUT", "DELETE"]
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 JAZZMIN_SETTINGS = {
     "site_title": "PressPesa Platform",
@@ -193,21 +193,22 @@ JAZZMIN_UI_TWEAKS = {
     },
 }
 
-STATIC_URL = '/static/'
+
+STATIC_URL = "/static/"
 
 # Location of static files
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 # Path where static files are stored
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Base url to serve media files
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 
 # Path where media files are stored
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 # Celery settings
 CELERY_BROKER_URL = "redis://localhost:6379"
