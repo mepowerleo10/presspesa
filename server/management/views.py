@@ -66,6 +66,6 @@ class CampaignList(generics.ListCreateAPIView):
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
 
-class CampaingDetails(generics.RetrieveUpdateDestroyAPIView):
+class CampaignDetails(generics.RetrieveUpdateDestroyAPIView):
     queryset = Campaign.objects.all()
     serializer_class = CampaignSerializer
