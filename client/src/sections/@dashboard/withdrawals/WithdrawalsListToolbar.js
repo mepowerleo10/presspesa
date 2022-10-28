@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Toolbar, Tooltip, IconButton, Typography, OutlinedInput, InputAdornment } from '@mui/material';
 // component
 import Iconify from '../../../components/Iconify';
+import { useTranslation } from 'src/components/LocalizationProvider';
 
 // ----------------------------------------------------------------------
 
@@ -29,13 +30,15 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-PaymentsListToolbar.propTypes = {
+WithdrawalsListToolbar.propTypes = {
   numSelected: PropTypes.number,
   filterName: PropTypes.string,
   onFilterName: PropTypes.func,
 };
 
-export default function PaymentsListToolbar({ numSelected, filterName, onFilterName }) {
+export default function WithdrawalsListToolbar({ numSelected, filterName, onFilterName }) {
+  const t = useTranslation();
+  
   return (
     <RootStyle
       sx={{
@@ -47,13 +50,13 @@ export default function PaymentsListToolbar({ numSelected, filterName, onFilterN
     >
       {numSelected > 0 ? (
         <Typography component="div" variant="subtitle1">
-          {numSelected} selected
+          {numSelected} {t("sharedSelected")}
         </Typography>
       ) : (
         <SearchStyle
           value={filterName}
           onChange={onFilterName}
-          placeholder="Search user..."
+          placeholder={t("sharedSearch")}
           startAdornment={
             <InputAdornment position="start">
               <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled', width: 20, height: 20 }} />

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 // material
 import { Box, Checkbox, TableRow, TableCell, TableHead, TableSortLabel } from '@mui/material';
+import { useTranslation } from 'src/components/LocalizationProvider';
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +17,7 @@ const visuallyHidden = {
   clip: 'rect(0 0 0 0)',
 };
 
-PaymentsListHead.propTypes = {
+WithdrawalsListHead.propTypes = {
   order: PropTypes.oneOf(['asc', 'desc']),
   orderBy: PropTypes.string,
   rowCount: PropTypes.number,
@@ -26,7 +27,7 @@ PaymentsListHead.propTypes = {
   onSelectAllClick: PropTypes.func,
 };
 
-export default function PaymentsListHead({
+export default function WithdrawalsListHead({
   order,
   orderBy,
   rowCount,
@@ -38,6 +39,9 @@ export default function PaymentsListHead({
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
+
+  const t = useTranslation();
+
 
   return (
     <TableHead>
@@ -61,9 +65,9 @@ export default function PaymentsListHead({
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              {t(headCell.label)}
               {orderBy === headCell.id ? (
-                <Box sx={{ ...visuallyHidden }}>{order === 'desc' ? 'sorted descending' : 'sorted ascending'}</Box>
+                <Box sx={{ ...visuallyHidden }}>{`${t("sharedSorted")} ${order === 'desc' ? t('sharedDescending') : t('sharedAscending')}`}</Box>
               ) : null}
             </TableSortLabel>
           </TableCell>

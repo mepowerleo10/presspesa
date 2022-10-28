@@ -70,6 +70,12 @@ export default function VideoCard({ index, url }) {
           setDisplay("none");
         }
       }}
+      fullScreenToggle={() => {
+        const player = playerRef.current;
+        if (player) {
+          player.requestFullscreen();
+        }
+      }}
       media={<Video options={videoJsOptions} onReady={handlePlayerReady} />}
     />
   );

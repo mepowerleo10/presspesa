@@ -1,17 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import { sessionReducer as session } from "./session";
-import { errorReducer as error } from "./errors";
+import { errorsReducer as errors } from "./errors";
 import { registrationReducer as registration } from "./registration";
 
 const reducer = combineReducers({
   session,
-  error,
+  errors,
   registration,
 });
 
 export { sessionActions } from "./session";
-export { errorActions } from "./errors";
+export { errorsActions } from "./errors";
 export { registrationActions } from "./registration";
 
 export default configureStore({

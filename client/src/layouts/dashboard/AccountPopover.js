@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 // @mui
 import { alpha } from "@mui/material/styles";
 import {
@@ -19,17 +19,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "src/firebase";
 import { sessionActions } from "src/store";
+import { useTranslation } from "src/components/LocalizationProvider";
 
 // ----------------------------------------------------------------------
 
 const MENU_OPTIONS = [
   {
-    label: "Home",
+    label: "sharedHome",
     icon: "eva:home-fill",
     linkTo: "/dashboard/ads",
   },
   {
-    label: "Profile",
+    label: "sharedProfile",
     icon: "eva:person-fill",
     linkTo: "#",
   },
@@ -42,6 +43,8 @@ export default function AccountPopover() {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const t = useTranslation();
 
   const [open, setOpen] = useState(null);
 
@@ -51,10 +54,15 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     setOpen(null);
-    dispatch(sessionActions.updateUser(null));
-    localStorage.removeItem("user");
-    signOut(auth);
   };
+
+  function logout() {
+    signOut(auth).then(() => {
+      dispatch(sessionActions.updateUser(null));
+      localStorage.removeItem("user");
+      navigate("/login");
+    });
+  }
 
   return (
     <>
@@ -117,7 +125,7 @@ export default function AccountPopover() {
               component={RouterLink}
               onClick={handleClose}
             >
-              {option.label}
+              {t(option.label)}
             </MenuItem>
           ))}
         </Stack>
@@ -125,12 +133,12 @@ export default function AccountPopover() {
         <Divider sx={{ borderStyle: "dashed" }} />
 
         <MenuItem
-          onClick={handleClose}
+          onClick={logout}
           to={"/login"}
           component={RouterLink}
           sx={{ m: 1 }}
         >
-          Logout
+          {t("sharedLogout")}
         </MenuItem>
       </MenuPopover>
     </>
