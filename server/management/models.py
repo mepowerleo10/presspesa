@@ -1,3 +1,4 @@
+from email.policy import default
 import uuid
 from django.db import models
 
@@ -29,7 +30,7 @@ class Company(models.Model):
     web_url = models.URLField("Web Page", blank=True, null=True)
     date_joined = models.DateTimeField("Date Joined", auto_created=True)
     is_active = models.BooleanField("Active")
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.CharField(max_length=120)
 
     class Meta:
         """Meta definition for Company."""
@@ -39,7 +40,7 @@ class Company(models.Model):
 
     def __str__(self):
         """Unicode representation of Company."""
-        pass
+        return f"{self.name} ({self.web_url})"
 
 
 class Campaign(models.Model):
@@ -62,7 +63,7 @@ class Campaign(models.Model):
 
     def __str__(self):
         """Unicode representation of Campaign."""
-        pass
+        return f"{self.name} - {self.company}"
 
 
 class Zone(models.Model):
@@ -71,8 +72,10 @@ class Zone(models.Model):
     name = models.CharField(max_length=50)
     campaign = models.ForeignKey(
         Campaign,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         help_text="The Compaign that the Zone Belongs to",
+        null=True,
+        blank=True
     )
 
     class Meta:
@@ -83,7 +86,7 @@ class Zone(models.Model):
 
     def __str__(self):
         """Unicode representation of Zone."""
-        pass
+        return self.name
 
 
 class Token(models.Model):
@@ -107,6 +110,41 @@ class Token(models.Model):
         pass
 
 
+class Media(models.Model):
+    """Model definition for Media."""
+
+    class MediaType(models.TextChoices):
+        """Model definition for MediaTypes."""
+
+        IMAGE = "IMG"
+        VIDEO = "VID"
+        AUDIO = "AUD"
+
+        class Meta:
+            """Meta definition for MediaTypes."""
+
+            verbose_name = "MediaTypes"
+            verbose_name_plural = "MediaTypess"
+
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    media_title = models.CharField(max_length=50)
+    media_description = models.TextField(max_length=100)
+    media_type = models.CharField(
+        choices=MediaType.choices, default=MediaType.IMAGE, max_length=50
+    )
+    file = models.FileField(upload_to="videos", default='settings.MEDIA_ROOT/videos/placeholder.file')
+
+    class Meta:
+        """Meta definition for Media."""
+
+        verbose_name = "Media"
+        verbose_name_plural = "Media"
+
+    def __str__(self):
+        """Unicode representation of Media."""
+        return self.media_title
+
+
 class Advertisement(models.Model):
     """Model definition for Advertisement."""
 
@@ -117,6 +155,7 @@ class Advertisement(models.Model):
     company = models.ForeignKey("Company", on_delete=models.CASCADE)
     campaigns = models.ManyToManyField(Campaign)
     zone = models.ManyToManyField(Zone)
+    media = models.ManyToManyField(Media)
 
     class Meta:
         """Meta definition for Advertisement."""
@@ -126,41 +165,4 @@ class Advertisement(models.Model):
 
     def __str__(self):
         """Unicode representation of Advertisement."""
-        pass
-
-
-class Media(models.Model):
-    """Model definition for Media."""
-
-    class MediaType(models.TextChoices):
-        """Model definition for MediaTypes."""
-
-        IMAGE = 1
-        VIDEO = 2
-        AUDIO = 3
-
-        class Meta:
-            """Meta definition for MediaTypes."""
-
-            verbose_name = "MediaTypes"
-            verbose_name_plural = "MediaTypess"
-
-        def __str__(self):
-            """Unicode representation of MediaTypes."""
-            pass
-
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    media_title = models.CharField(max_length=50)
-    media_description = models.TextField(max_length=100)
-    media_type = models.SmallIntegerField(choices=MediaType.choices, default=MediaType.IMAGE
-    )
-
-    class Meta:
-        """Meta definition for Media."""
-
-        verbose_name = "Media"
-        verbose_name_plural = "Media"
-
-    def __str__(self):
-        """Unicode representation of Media."""
-        pass
+        return f"{self.title} ({self.company})"

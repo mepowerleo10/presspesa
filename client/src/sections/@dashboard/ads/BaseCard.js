@@ -19,6 +19,7 @@ import { fShortenNumber } from "../../../utils/formatNumber";
 import SvgIconStyle from "../../../components/SvgIconStyle";
 import Iconify from "../../../components/Iconify";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import { Fullscreen } from "@mui/icons-material";
 
 // ----------------------------------------------------------------------
 
@@ -65,17 +66,18 @@ const CoverImgStyle = styled("div")({
 
 // ----------------------------------------------------------------------
 
-ImageCard.propTypes = {
+BaseCard.propTypes = {
   post: PropTypes.object.isRequired,
   index: PropTypes.number,
 };
 
-export default function ImageCard({
+export default function BaseCard({
   post,
   index,
   media,
   displayValue,
   togglePlay,
+  fullScreenToggle,
 }) {
   const { cover, title, view, comment, share, author, createdAt } = post;
   const latestPostLarge = index === 0;
@@ -148,7 +150,13 @@ export default function ImageCard({
 
           <CoverImgStyle alt={title} src={cover} children={media} />
           <IconButton
-            sx={{ position: "absolute", top: "45%", left: "45%", zIndex: 1, display: displayValue }}
+            sx={{
+              position: "absolute",
+              top: "45%",
+              left: "45%",
+              zIndex: 1,
+              display: displayValue,
+            }}
           >
             <PlayCircleOutlineIcon fontSize="large" color="white" />
           </IconButton>
@@ -203,6 +211,9 @@ export default function ImageCard({
                 </Typography>
               </Box>
             ))}
+            <IconButton onClick={() => fullScreenToggle()}>
+              <Fullscreen />
+            </IconButton>
           </InfoStyle>
         </CardContent>
       </Card>
