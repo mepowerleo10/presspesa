@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
-    'rest_framework_simplejwt.token_blacklist',
+    "rest_framework_simplejwt.token_blacklist",
     "management",
     "account",
     "advertisement",
@@ -42,10 +42,9 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        'rest_framework.authentication.SessionAuthentication',
+        "rest_framework.authentication.SessionAuthentication",
         # "rest_framework_simplejwt.authentication.JWTAuthentication",
         # "firebase_auth.authentication.FirebaseAuthentication"
-    ),
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
 }
 
@@ -93,7 +92,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates'],
+        "DIRS": ["templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -135,12 +134,12 @@ TIME_ZONE = "Africa/Dar_es_Salaam"
 
 USE_I18N = True
 
-USE_TZ = True
-
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "static/"
+USE_TZ = Truesssssssssssssssssssssssssssssssssssssssssss
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+X_FRAME_OPTIONS = "ALLOWALL"
+XS_SHARING_ALLOWED_METHODS = ["POST", "GET", "OPTIONS", "PUT", "DELETE"]
 
 JAZZMIN_SETTINGS = {
     "site_title": "PressPesa Platform",
@@ -149,8 +148,8 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Welcome to PressPesa Platform Management",
     "copyright": "PressPesa Ltd",
     "show_ui_builder": True,
-    "changeform_format": "vertical_tabs",
-    "related_modal_active": False,
+    # "changeform_format": "vertical_tabs",
+    "related_modal_active": True,
     "topmenu_links": [
         # Url that gets reversed (Permissions can be added)
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
@@ -193,7 +192,6 @@ JAZZMIN_UI_TWEAKS = {
     },
 }
 
-
 STATIC_URL = '/static/'
 
 # Location of static files
@@ -209,3 +207,7 @@ MEDIA_URL = '/media/'
 
 # Path where media files are stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"

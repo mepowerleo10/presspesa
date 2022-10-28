@@ -4,12 +4,12 @@ import DashboardLayout from "./layouts/dashboard";
 import LogoOnlyLayout from "./layouts/LogoOnlyLayout";
 //
 import Ads from "./pages/Ads";
-import Payments from "./pages/Payments";
 import Login from "./pages/Login";
 import NotFound from "./pages/Page404";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
 import DashboardApp from "./pages/DashboardApp";
+import Withdrawals from "./pages/Withdrawals";
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { path: "app", element: <DashboardApp /> },
-        { path: "payments", element: <Payments /> },
+        { path: "withdrawals", element: <Withdrawals /> },
         { path: "products", element: <Products /> },
         { path: "", element: <Ads /> },
       ],

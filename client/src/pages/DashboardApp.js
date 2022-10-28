@@ -13,11 +13,13 @@ import {
 } from "../sections/@dashboard/app";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "src/components/LocalizationProvider";
 
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
   const theme = useTheme();
+  const t = useTranslation();
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
@@ -30,16 +32,16 @@ export default function DashboardApp() {
   }, [navigate, user]);
 
   return (
-    <Page title="Dashboard">
+    <Page title={t("sharedDashboard")}>
       <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Welcome {user && user.displayName}!
+          {t("sharedWelcome")} {user && user.displayName}!
         </Typography>
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary
-              title="Weekly Earnings"
+              title={t("sharedWeeklyEarnings")}
               total={7100}
               icon={"ant-design:dollar-circle-filled"}
             />
@@ -47,7 +49,7 @@ export default function DashboardApp() {
 
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary
-              title="Videos Viewed (Week)"
+              title={`${t("sharedVideosViewed")} (${t("sharedWeek")})`}
               total={131}
               color="info"
               icon={"ant-design:video-camera-filled"}
@@ -56,7 +58,7 @@ export default function DashboardApp() {
 
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary
-              title="Monthly Earnings"
+              title={t("sharedMonthlyEarnings")}
               total={60000}
               color="warning"
               icon={"ant-design:dollar-circle-filled"}
@@ -65,7 +67,7 @@ export default function DashboardApp() {
 
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary
-              title="Videos Views (Month)"
+              title={`${t("sharedVideosViewed")} (${t("sharedMonth")})`}
               total={534}
               color="error"
               icon={"ant-design:video-camera-filled"}
@@ -74,7 +76,7 @@ export default function DashboardApp() {
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
-              title="Earning Trends"
+              title={t("sharedEarningTrends")}
               subheader="(+43%) than last year"
               chartLabels={[
                 "01/01/2023",
@@ -105,15 +107,15 @@ export default function DashboardApp() {
 
           <Grid item xs={12} md={6} lg={4}>
             <AppOrderTimeline
-              title="Cashflow Timeline"
+              title={t("sharedCashflowTimeline")}
               list={[...Array(5)].map((_, index) => ({
                 id: faker.datatype.uuid(),
                 title: [
-                  "Earned Tshs. 20,000",
-                  "Withdrew Tshs. 12,000",
-                  "Withdrew Tshs. 15,000",
-                  "Earned Tshs. 7,000",
-                  "Earned Tshs. 1,000",
+                  `${t("sharedEarned")} Tshs. 20,000`,
+                  `${t("sharedWithdrew")} Tshs. 12,000`,
+                  `${t("sharedWithdrew")} Tshs. 15,000`,
+                  `${t("sharedEarned")} Tshs. 7,000`,
+                  `${t("sharedEarned")} Tshs. 1,000`,
                 ][index],
                 type: `order${index + 1}`,
                 time: faker.date.past(),

@@ -1,15 +1,14 @@
 import os
 
 import firebase_admin
-from firebase_admin import auth
-from firebase_admin import credentials
+from config.settings import env
+from django.contrib.auth import get_user_model
+from firebase_admin import auth, credentials
 from rest_framework import authentication
 from rest_framework.response import Response
-from django.contrib.auth import get_user_model
 
-from firebase_auth.exceptions import NoAuthToken, InvalidAuthToken, FirebaseError
-
-from config.settings import env
+from firebase_auth.exceptions import (FirebaseError, InvalidAuthToken,
+                                      NoAuthToken)
 
 cred = credentials.Certificate(env("FIREBASE_SERVICE_ACCOUNT_KEY_PATH"))
 

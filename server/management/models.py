@@ -1,4 +1,3 @@
-from email.policy import default
 import uuid
 from django.db import models
 
@@ -25,7 +24,7 @@ class Company(models.Model):
 
     def __str__(self):
         """Unicode representation of Company."""
-        return self.name
+        return f"{self.name} ({self.web_url})"
 
 
 class Campaign(models.Model):
@@ -48,7 +47,7 @@ class Campaign(models.Model):
 
     def __str__(self):
         """Unicode representation of Campaign."""
-        return self.name
+        return f"{self.name} - {self.company}"
 
 
 class Zone(models.Model):
@@ -57,8 +56,10 @@ class Zone(models.Model):
     name = models.CharField(max_length=50)
     campaign = models.ForeignKey(
         Campaign,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         help_text="The Compaign that the Zone Belongs to",
+        null=True,
+        blank=True
     )
 
     class Meta:
@@ -92,4 +93,37 @@ class Token(models.Model):
         """Unicode representation of Token."""
         return f'{self.offered_by}'
 
+class Media(models.Model):
+    """Model definition for Media."""
+
+    class MediaType(models.TextChoices):
+        """Model definition for MediaTypes."""
+
+        IMAGE = "IMG"
+        VIDEO = "VID"
+        AUDIO = "AUD"
+
+        class Meta:
+            """Meta definition for MediaTypes."""
+
+            verbose_name = "MediaTypes"
+            verbose_name_plural = "MediaTypess"
+
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    media_title = models.CharField(max_length=50)
+    media_description = models.TextField(max_length=100)
+    media_type = models.CharField(
+        choices=MediaType.choices, default=MediaType.IMAGE, max_length=50
+    )
+    file = models.FileField(upload_to="videos", default='settings.MEDIA_ROOT/videos/placeholder.file')
+
+    class Meta:
+        """Meta definition for Media."""
+
+        verbose_name = "Media"
+        verbose_name_plural = "Media"
+
+    def __str__(self):
+        """Unicode representation of Media."""
+        return self.media_title
 

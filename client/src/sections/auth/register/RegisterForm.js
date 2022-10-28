@@ -10,7 +10,7 @@ import { LoadingButton } from "@mui/lab";
 
 import { FormProvider, RHFTextField } from "../../../components/hook-form";
 import { useDispatch } from "react-redux";
-import { registrationActions, sessionActions } from "src/store";
+import { errorsActions, registrationActions, sessionActions } from "src/store";
 import Iconify from "src/components/Iconify";
 import RHFPhoneField from "src/components/hook-form/RHFPhoneField";
 
@@ -21,31 +21,35 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { db } from "src/firebase";
+import { useTranslation } from "src/components/LocalizationProvider";
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const t = useTranslation();
   const auth = getAuth();
 
   const [emailExists, setEmailExists] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const [showPassword, setShowPassword] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
-    firstName: Yup.string().required("First name required").min(3),
-    lastName: Yup.string().required("Last name required").min(3),
+    firstName: Yup.string().required(t("sharedFirstNameRequired")).min(3),
+    lastName: Yup.string().required(t("sharedLastNameRequired")).min(3),
     email: Yup.string()
-      .email("Email must be a valid email address")
-      .required("Email is required"),
+      .email(t("sharedEmailMustBeValid"))
+      .required(t("sharedEmailIsRequired")),
     phone: Yup.string()
-      .required("Phone number is required")
-      .length(9, "Phone number must be a valid one"),
-    password: Yup.string().required("Password is required"),
+      .required(t("sharedPhoneNumberIsRequired"))
+      .length(9, t("sharedPhoneNumberMustBeAValidOne")),
+    password: Yup.string().required(t("sharedPasswordIsRequired")).min(6, t("sharedPasswordLength")),
     password_confirm: Yup.string()
-      .required("Password Confirmation is required")
-      .oneOf([Yup.ref("password"), null], "Passwords must match"),
+      .required(t("sharedPasswordConfirmationIsRequired"))
+      .oneOf([Yup.ref("password"), null], t("sharedPasswordsMustMatch")),
   });
 
   const defaultValues = {
@@ -80,7 +84,8 @@ export default function RegisterForm() {
     user.password = methods.getValues().password;
 
     if (user.password === methods.getValues().password_confirm) {
-      createUserWithEmailAndPassword(auth, user.email, user.password).then(
+      await setIsLoading(true);
+      await createUserWithEmailAndPassword(auth, user.email, user.password).then(
         (userCredential) => {
           updateProfile(auth.currentUser, {
             email: user.email,
@@ -92,14 +97,15 @@ export default function RegisterForm() {
               }).then(() => {
                 dispatch(sessionActions.updateUser(user));
                 navigate("/login", { replace: true });
-              });
+              }).catch((error) => dispatch(errorsActions.push(error.message)))
             })
             .catch((error) => {
-              console.log(error);
               setEmailExists(true);
+              dispatch(errorsActions.push(t("sharedEmailAlreadyExists")));
             });
         }
       );
+      await setIsLoading(false);
     }
   };
 
@@ -107,15 +113,15 @@ export default function RegisterForm() {
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
         <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-          <RHFTextField name="firstName" label="First name" />
-          <RHFTextField name="lastName" label="Last name" />
+          <RHFTextField name="firstName" label={t("sharedFirstName")} />
+          <RHFTextField name="lastName" label={t("sharedLastName")} />
         </Stack>
-        <RHFPhoneField name="phone" label="Phone number" type="phone" />
-        <RHFTextField name="email" label="Email address" />
+        <RHFPhoneField name="phone" label={t("sharedPhoneNumber")} type="phone" />
+        <RHFTextField name="email" label={t("sharedEmailAddress")} />
         <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
           <RHFTextField
             name="password"
-            label="Password"
+            label={t("sharedPassword")}
             type={showPassword ? "text" : "password"}
             InputProps={{
               endAdornment: (
@@ -134,7 +140,7 @@ export default function RegisterForm() {
           />
           <RHFTextField
             name="password_confirm"
-            label="Confirm Password"
+            label={t("sharedConfirmPassword")}
             type={showPassword ? "text" : "password"}
             InputProps={{
               endAdornment: (
@@ -157,9 +163,9 @@ export default function RegisterForm() {
           size="large"
           type="submit"
           variant="contained"
-          loading={isSubmitting}
+          loading={isLoading}
         >
-          Register
+          {t("sharedRegister")}
         </LoadingButton>
         {/* <Snackbar
           open={emailExists}

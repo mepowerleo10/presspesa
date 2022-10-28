@@ -24,17 +24,19 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { PaymentsListHead, PaymentsListToolbar, PaymentsMoreMenu } from '../sections/@dashboard/payments';
 // mock
-import PAYMENTSLIST from '../_mock/payments';
+import WITHDRAWSLIST from '../_mock/withdrawals';
 import moment from 'moment';
+import { useTranslation } from 'src/components/LocalizationProvider';
+import WithdrawalsListHead from 'src/sections/@dashboard/withdrawals/WithdrawalsListHead';
+import WithdrawalsListToolbar from 'src/sections/@dashboard/withdrawals/WithdrawalsListToolbar';
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'date', label: 'Date', alignRight: false },
-  { id: 'amount', label: 'Amount', alignRight: false },
+  // { id: 'company', label: 'Company', alignRight: false },
+  { id: 'date', label: "sharedDate", alignRight: false },
+  { id: 'amount', label: "sharedAmount", alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
@@ -68,7 +70,9 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Payments() {
+export default function Withdrawals() {
+  const t = useTranslation();
+  
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('desc');
@@ -89,7 +93,7 @@ export default function Payments() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = PAYMENTSLIST.map((n) => n.name);
+      const newSelecteds = WITHDRAWSLIST.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -124,38 +128,38 @@ export default function Payments() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - PAYMENTSLIST.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - WITHDRAWSLIST.length) : 0;
 
-  const filteredPayments = applySortFilter(PAYMENTSLIST, getComparator(order, orderBy), filterName);
+  const filteredWithdrawals = applySortFilter(WITHDRAWSLIST, getComparator(order, orderBy), filterName);
 
-  const isUserNotFound = filteredPayments.length === 0;
+  const isUserNotFound = filteredWithdrawals.length === 0;
 
   return (
-    <Page title="Payments">
+    <Page title={t("sharedWithdrawals")}>
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Payments
+            {t("sharedWithdrawals")}
           </Typography>
         </Stack>
 
         <Card>
-          <PaymentsListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+          <WithdrawalsListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
 
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
-                <PaymentsListHead
+                <WithdrawalsListHead
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={PAYMENTSLIST.length}
+                  rowCount={WITHDRAWSLIST.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredPayments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                  {filteredWithdrawals.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     const { id, company, date, amount } = row;
                     const isItemSelected = selected.indexOf(id) !== -1;
 
@@ -171,7 +175,7 @@ export default function Payments() {
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, company)} />
                         </TableCell>
-                        <TableCell align="left">{company}</TableCell>
+                        {/* <TableCell align="left">{company}</TableCell> */}
                         <TableCell align="left">
                           {moment(date).fromNow().toString()}
                         </TableCell>
@@ -204,7 +208,7 @@ export default function Payments() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={PAYMENTSLIST.length}
+            count={WITHDRAWSLIST.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
