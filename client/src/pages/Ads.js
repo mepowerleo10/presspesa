@@ -1,42 +1,55 @@
-import { Grid, Container } from "@mui/material";
+import { Grid, Container, LinearProgress } from "@mui/material";
 // components
 import Page from "../components/Page";
-// mock
-import POSTS from "../_mock/ads";
+
 import VideoCard from "src/sections/@dashboard/ads/VideoCard";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { errorsActions } from "src/store";
+import { useEffectAsync } from "src/utils/helpers";
 
 export default function Ads() {
-  const baseUrl = "http://app.thought.ninja";
+  const dispatch = useDispatch();
+
+  // const baseUrl = "http://app.thought.ninja";
+  const baseUrl = "http://127.0.0.1:8001";
+  const [videos, setVideos] = useState([]);
+
+  useEffectAsync(async () => {
+    try {
+      const url = `${baseUrl}/api/ads/`;
+      const response = await fetch(url, { method: "GET" });
+      const data = await response.json();
+      console.table(data);
+      setVideos(data);
+    } catch (e) {
+      console.log(e);
+      dispatch(errorsActions.push("error"));
+    }
+  }, [baseUrl]);
+
+  if (videos.length > 0) {
+    return (
+      <Page title="Dashboard: Ads">
+        <Container>
+          <Grid container spacing={3}>
+            {videos.map((video, index) => (
+              <VideoCard
+                key={index}
+                index={index}
+                url={`http://127.0.0.1/streaming/processed/${video.uuid}/dash.mpd`}
+                play={true}
+              />
+            ))}
+          </Grid>
+        </Container>
+      </Page>
+    );
+  }
 
   return (
     <Page title="Dashboard: Ads">
-      <Container>
-        <Grid container spacing={3}>
-          <VideoCard
-            index={0}
-            url={`${baseUrl}/streaming/rpg/dash.mpd`}
-            play={true}
-          />
-          <VideoCard
-            index={1}
-            url={`${baseUrl}/streaming/ariana_grande/dash.mpd`}
-            play={true}
-          />
-          <VideoCard
-            index={2}
-            url={`${baseUrl}/streaming/big/dash.mpd`}
-            play={true}
-          />
-          <VideoCard
-            index={3}
-            url={`${baseUrl}/streaming/rpg/dash.mpd`}
-            play={true}
-          />
-          {/* {POSTS.map((post, index) => (
-            <AdCard key={post.id} post={post} index={index} />
-          ))} */}
-        </Grid>
-      </Container>
+      <LinearProgress />
     </Page>
   );
 }
