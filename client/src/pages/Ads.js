@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { errorsActions } from "src/store";
 import { useEffectAsync } from "src/utils/helpers";
+import { formatAPIURL } from "src/utils/formatUrl";
 
 export default function Ads() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function Ads() {
 
   useEffectAsync(async () => {
     try {
-      const url = `${baseUrl}/api/ads/`;
+      const url = formatAPIURL();
       const response = await fetch(url, { method: "GET" });
       const data = await response.json();
       console.table(data);
