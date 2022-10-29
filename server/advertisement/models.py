@@ -47,12 +47,7 @@ class Media(models.Model):
     video_bitrate = models.CharField(max_length=10, default="", blank=True)
     audio_bitrate = models.CharField(max_length=10, default="", blank=True)
 
-    def update_video_metadata(self) -> None:
-        input_path = self.file.path
-        output_path = f"{settings.MEDIA_ROOT}processed/{self.uuid}"
-
-        if not os.path.exists(output_path):
-            os.makedirs(output_path)
+    def update_video_metadata(self, input_path, output_path) -> None:
 
         ffprobe = FFProbe(input_path)
         ffprobe.save_as_json(os.path.join(output_path, "probe.json"))

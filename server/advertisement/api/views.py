@@ -14,5 +14,5 @@ class MediaView(GenericAPIView):
         return Response(serializer.data)
 
 class MediaListView(ListAPIView):
-    queryset = Media.objects.all()
+    queryset = Media.objects.filter(is_done_processing=True)
     serializer_class = MediaSerializer

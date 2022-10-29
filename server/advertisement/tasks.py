@@ -4,9 +4,11 @@ import ffmpeg_streaming as ffstream
 from celery import shared_task
 from ffmpeg_streaming import Bitrate, Formats, Representation, Size
 
+from .models import Media
+
 
 @shared_task
-def generate_dash_from_video_upload(input_path, output_path):
+def generate_dash_from_video_upload(input_path, output_path, video_id: int):
     logging.basicConfig(
         filename="processing.log", encoding="utf-8", level=logging.DEBUG
     )
@@ -30,5 +32,11 @@ def generate_dash_from_video_upload(input_path, output_path):
     logging.info(f"Trying to write output to {output_video_path}")
     dash.output(f"{output_video_path}/dash.mpd")
     logging.info(f"Success writing to {output_video_path}")
+
+    video = Media.objects.get(pk=video_id)
+
+    video.is_done_processing = True
+    video.update_video_metadata(input_path, output_path)
+    video.save()
 
     return f"Done processing video {input_video_path}"
