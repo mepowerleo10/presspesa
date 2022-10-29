@@ -17,7 +17,7 @@ SECRET_KEY = "django-insecure-jp5l0-=n3lcffsr+bbf+p$f#&v*xei28jlw=o16&w6mz0-h27t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "app.thought.ninja", "localhost", "4.224.30.208"]
 
 
 # Application definition
