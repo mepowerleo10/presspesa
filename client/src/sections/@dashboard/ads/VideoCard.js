@@ -4,14 +4,17 @@ import POSTS from "../../../_mock/ads";
 import { useEffect, useRef, useState } from "react";
 import { Video } from "src/sections/@dashboard/ads/Video";
 import BaseCard from "src/sections/@dashboard/ads/BaseCard";
+import { formatAPIURL, formatStreamingURL } from "src/utils/formatUrl";
+import { useDispatch, useSelector } from "react-redux";
+import { watchedActions } from "src/store";
 
-export default function VideoCard({ index, url }) {
+export default function VideoCard({ index, video }) {
   const playerRef = useRef(null);
+  const dispatch = useDispatch();
   const [ready, setReady] = useState(false);
   const [display, setDisplay] = useState("block");
   const [play, setPlay] = useState(false);
-
-  console.log(url);
+  const watchedVideos = useSelector((state) => state.watched.items);
 
   const videoJsOptions = {
     autoplay: false,
@@ -21,16 +24,44 @@ export default function VideoCard({ index, url }) {
     // fluid: true,
     sources: [
       {
-        src: url,
+        src: formatStreamingURL(video.uuid),
         type: "application/dash+xml",
       },
     ],
+  };
+
+  const markAsWatched = async (duration, currentTime, uuid) => {
+    const percentage = currentTime / duration;
+
+    if (percentage >= 0.02 && !watchedVideos.includes(uuid)) {
+      console.log(`${uuid} watched`);
+      const url = formatAPIURL("watch", video.uuid);
+      dispatch(watchedActions.push(uuid));
+
+      try {
+        const response = await fetch(url, { method: "POST" });
+        if (response.ok) {
+          const data = await response.json();
+          video = data;
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
 
   const handlePlayerReady = (player) => {
     playerRef.current = player;
 
     // You can handle player events here, for example:
+    player.on("play", () => {
+      console.log(player.currentTime() / player.duration());
+    });
+
+    player.on("timeupdate", () => {
+      markAsWatched(player.duration(), player.currentTime(), video.uuid);
+    });
+
     player.on("waiting", () => {
       videojs.log("player is waiting");
     });
@@ -58,6 +89,7 @@ export default function VideoCard({ index, url }) {
   return (
     <BaseCard
       key={index}
+      video={video}
       post={POSTS[index]}
       index={index}
       displayValue={display}

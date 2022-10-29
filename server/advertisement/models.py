@@ -1,3 +1,4 @@
+from email.policy import default
 import os
 import uuid
 from typing import Iterable, Optional
@@ -26,14 +27,16 @@ class Media(models.Model):
 
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     campaigns = models.ManyToManyField(Company, blank=True, null=True)
-    media_title = models.CharField(max_length=50)
-    media_description = models.TextField(max_length=100)
-    media_type = models.CharField(
+    title = models.CharField(max_length=50)
+    description = models.TextField(max_length=100)
+    type = models.CharField(
         choices=MediaType.choices, default=MediaType.IMAGE, max_length=150
     )
     file = models.FileField(
         upload_to="videos", default="settings.MEDIA_ROOT/videos/placeholder.file"
     )
+    share_count = models.IntegerField(default=0, editable=False)
+    view_count = models.IntegerField(default=0, editable=False)
 
     # DASH processing fields
     is_done_processing = models.BooleanField(default=False)
@@ -73,7 +76,7 @@ class Media(models.Model):
 
     def __str__(self):
         """Unicode representation of Media."""
-        return self.media_title
+        return self.title
 
 
 class Advertisement(models.Model):

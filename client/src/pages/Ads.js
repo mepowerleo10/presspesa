@@ -37,7 +37,7 @@ export default function Ads() {
               <VideoCard
                 key={index}
                 index={index}
-                url={`http://127.0.0.1/streaming/processed/${video.uuid}/dash.mpd`}
+                video={video}
                 play={true}
               />
             ))}

@@ -78,14 +78,15 @@ export default function BaseCard({
   displayValue,
   togglePlay,
   fullScreenToggle,
+  video,
 }) {
   const { cover, title, view, comment, share, author, createdAt } = post;
   const latestPostLarge = index === 0;
   const latestPost = index === 1 || index === 2;
 
   const AD_INFO = [
-    { number: view, icon: "eva:eye-fill" },
-    { number: share, icon: "eva:share-fill" },
+    { number: video.view_count, icon: "eva:eye-fill" },
+    { number: share.share_count, icon: "eva:share-fill" },
   ];
 
   return (
@@ -148,7 +149,7 @@ export default function BaseCard({
             }}
           />
 
-          <CoverImgStyle alt={title} src={cover} children={media} />
+          <CoverImgStyle alt={video.title} src={cover} children={media} />
           <IconButton
             sx={{
               position: "absolute",
@@ -186,7 +187,7 @@ export default function BaseCard({
               display: displayValue,
             }}
           >
-            {title}
+            {video.title}
           </TitleStyle>
 
           <InfoStyle>
