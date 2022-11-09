@@ -1,5 +1,5 @@
 from django.urls import path
-from management.views import (
+from management.api.views import (
     CompanyDetails,
     CompanyList,
     TokenList,
