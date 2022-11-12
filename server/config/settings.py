@@ -12,12 +12,12 @@ env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-jp5l0-=n3lcffsr+bbf+p$f#&v*xei28jlw=o16&w6mz0-h27t"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ["127.0.0.1", "app.thought.ninja", "localhost", "4.224.30.208"]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -110,9 +110,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-DATABASES = {
-    "default": env.db_url()
-}
+DATABASES = {"default": env.db_url()}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -209,8 +207,8 @@ MEDIA_URL = "/media/"
 
 # Path where media files are stored
 # MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-MEDIA_ROOT = "/srv/http/streaming/"
+MEDIA_ROOT = env("MEDIA_ROOT")
 
 # Celery settings
-CELERY_BROKER_URL = "redis://localhost:6379"
-CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND")

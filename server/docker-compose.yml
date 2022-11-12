@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/pgsql/data
+    environment:
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASS}
+  redis: 
+     image: redislabs/redismod
+     ports:
+       - '6379:6379'
+  web:
+    build: 
+      context: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/server:Z
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+  celery:
+    build: 
+      context: .
+    command: celery -A config worker -l info
+    volumes:
+      - .:/server:Z
+    depends_on:
+      - web
+  flower:
+    build:
+      context: .
+    command: celery -A config flower -l info
+    volumes:
+      - .:/server:Z
+    ports:
+      - 5557:5555
+    depends_on:
+      - celery
