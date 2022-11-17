@@ -26,7 +26,7 @@ class Media(models.Model):
             verbose_name_plural = "MediaTypess"
 
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    campaigns = models.ManyToManyField(Company, blank=True, null=True)
+    campaigns = models.ManyToManyField(Campaign, blank=True, null=True)
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=100)
     type = models.CharField(

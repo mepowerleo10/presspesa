@@ -5,16 +5,9 @@ from .models import Campaign, Company, Token, Zone
 class CampaignAdmin(admin.ModelAdmin):
     """Admin View for Campaign"""
 
-    """ list_display = ('',)
-    list_filter = ('',)
-    inlines = [
-        Inline,
-    ]
-    raw_id_fields = ('',)
-    readonly_fields = ('',)
-    search_fields = ('',)
-    date_hierarchy = ''
-    ordering = ('',) """
+    list_display = ('name', 'company', 'start_date', 'end_date')
+    list_filter = ('name', 'company')
+    ordering = ('-end_date',)
 
 
 class CampaignInline(admin.TabularInline):
@@ -23,6 +16,9 @@ class CampaignInline(admin.TabularInline):
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'is_active', 'date_joined', 'city')
+    ordering = ('-date_joined', 'name',)
+    serach_fields = ('name', 'city', 'street')
     inlines = [CampaignInline]
 
 
@@ -32,29 +28,12 @@ class CompanyAdmin(admin.ModelAdmin):
 class TokenAdmin(admin.ModelAdmin):
     """Admin View for Token"""
 
-    """ list_display = ('',)
-    list_filter = ('',)
-    inlines = [
-        Inline,
-    ]
-    raw_id_fields = ('',)
-    readonly_fields = ('',)
-    search_fields = ('',)
-    date_hierarchy = ''
-    ordering = ('',) """
+    list_display = ('offered_by', 'is_valid', 'count', 'token_value',)
+    ordering = ('-created_on',)
 
 
 @admin.register(Zone)
 class ZoneAdmin(admin.ModelAdmin):
     """Admin View for Zone"""
 
-    """ list_display = ('',)
-    list_filter = ('',)
-    inlines = [
-        Inline,
-    ]
-    raw_id_fields = ('',)
-    readonly_fields = ('',)
-    search_fields = ('',)
-    date_hierarchy = ''
-    ordering = ('',) """
+    list_display = ('name', 'campaign',)
