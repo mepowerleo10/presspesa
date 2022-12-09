@@ -1,20 +1,15 @@
 from django.contrib import admin
-from .models import Campaign, Company, Token, Zone
+from django.http import HttpRequest
+from .models import Campaign, Company, Credit, CreditDebt, CreditOffering, Zone
+
+
+class ZoneInline(admin.TabularInline):
+    model = Zone
+
 
 @admin.register(Campaign)
 class CampaignAdmin(admin.ModelAdmin):
-    """Admin View for Campaign"""
-
-    """ list_display = ('',)
-    list_filter = ('',)
-    inlines = [
-        Inline,
-    ]
-    raw_id_fields = ('',)
-    readonly_fields = ('',)
-    search_fields = ('',)
-    date_hierarchy = ''
-    ordering = ('',) """
+    inlines = [ZoneInline]
 
 
 class CampaignInline(admin.TabularInline):
@@ -26,35 +21,28 @@ class CompanyAdmin(admin.ModelAdmin):
     inlines = [CampaignInline]
 
 
-
-
-@admin.register(Token)
-class TokenAdmin(admin.ModelAdmin):
-    """Admin View for Token"""
-
-    """ list_display = ('',)
-    list_filter = ('',)
-    inlines = [
-        Inline,
-    ]
-    raw_id_fields = ('',)
-    readonly_fields = ('',)
-    search_fields = ('',)
-    date_hierarchy = ''
-    ordering = ('',) """
-
-
 @admin.register(Zone)
 class ZoneAdmin(admin.ModelAdmin):
-    """Admin View for Zone"""
+    pass
 
-    """ list_display = ('',)
-    list_filter = ('',)
-    inlines = [
-        Inline,
-    ]
-    raw_id_fields = ('',)
-    readonly_fields = ('',)
-    search_fields = ('',)
-    date_hierarchy = ''
-    ordering = ('',) """
+
+@admin.register(Credit)
+class CreditAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(CreditOffering)
+class CreditOfferingAdmin(admin.ModelAdmin):
+    def get_readonly_fields(self, request: HttpRequest, obj):
+        if obj:
+            return ["amount", "to", "on"]
+        else:
+            return []
+
+@admin.register(CreditDebt)
+class CreditDebtAdmin(admin.ModelAdmin):
+    def get_readonly_fields(self, request: HttpRequest, obj):
+        if obj:
+            return ["amount", "to", "on"]
+        else:
+            return []

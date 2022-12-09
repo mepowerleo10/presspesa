@@ -12,8 +12,6 @@ import { formatAPIURL } from "src/utils/formatUrl";
 export default function Ads() {
   const dispatch = useDispatch();
 
-  // const baseUrl = "http://app.thought.ninja";
-  const baseUrl = "http://127.0.0.1:8001";
   const [videos, setVideos] = useState([]);
 
   useEffectAsync(async () => {
@@ -27,7 +25,7 @@ export default function Ads() {
       console.log(e);
       dispatch(errorsActions.push("error"));
     }
-  }, [baseUrl]);
+  }, []);
 
   if (videos.length > 0) {
     return (
@@ -35,12 +33,7 @@ export default function Ads() {
         <Container>
           <Grid container spacing={3}>
             {videos.map((video, index) => (
-              <VideoCard
-                key={index}
-                index={index}
-                video={video}
-                play={true}
-              />
+              <VideoCard key={index} index={index} video={video} play={true} />
             ))}
           </Grid>
         </Container>

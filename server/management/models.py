@@ -1,6 +1,45 @@
 import uuid
+
 from django.db import models
 
+
+class Credit(models.Model):
+
+    initial_value = models.PositiveIntegerField(editable=False)
+    current_value = models.PositiveIntegerField(editable=False)
+    offered_to = models.ForeignKey("Company", on_delete=models.PROTECT, editable=False)
+
+    class Meta:
+        verbose_name = "credit"
+        verbose_name_plural = "credits"
+
+    def __str__(self):
+        return f"{self.offered_to}"
+
+
+class CreditOffering(models.Model):
+    amount = models.PositiveIntegerField()
+    to = models.ForeignKey("Company", on_delete=models.PROTECT)
+    on = models.DateTimeField(auto_now_add=True, editable=False)
+
+    class Meta:
+        verbose_name = "credit offering"
+        verbose_name_plural = "credit offerings"
+
+    def __str__(self):
+        return f"{self.to}"
+
+class CreditDebt(models.Model):
+    amount = models.PositiveIntegerField()
+    to = models.ForeignKey("Company", on_delete=models.PROTECT)
+    on = models.DateTimeField(auto_now_add=True, editable=False)
+
+    class Meta:
+        verbose_name = "credit debt"
+        verbose_name_plural = "credit debts"
+
+    def __str__(self):
+        return f"{self.to}"
 
 
 class Company(models.Model):
@@ -9,12 +48,15 @@ class Company(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     name = models.CharField("Name", max_length=50)
     web_url = models.URLField("Web Page", blank=True, null=True)
-    date_joined = models.DateTimeField("Date Joined", auto_created=True, auto_now_add=True)
+    date_joined = models.DateTimeField(
+        "Date Joined", auto_created=True, auto_now_add=True
+    )
     is_active = models.BooleanField("Active")
-    country = models.CharField(max_length=50, default='Tanzania')
+    country = models.CharField(max_length=50, default="Tanzania")
     city = models.CharField(max_length=50)
     street = models.CharField(max_length=50)
     house_no = models.CharField(max_length=50, blank=True, null=True)
+    current_credit = models.ForeignKey("Credit", blank=True, null=True, on_delete=models.DO_NOTHING)
 
     class Meta:
         """Meta definition for Company."""
@@ -59,7 +101,7 @@ class Zone(models.Model):
         on_delete=models.SET_NULL,
         help_text="The Compaign that the Zone Belongs to",
         null=True,
-        blank=True
+        blank=True,
     )
 
     class Meta:
@@ -71,24 +113,3 @@ class Zone(models.Model):
     def __str__(self):
         """Unicode representation of Zone."""
         return self.name
-
-
-class Token(models.Model):
-    """Model definition for Token."""
-
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    created_on = models.DateTimeField(auto_created=True)
-    is_valid = models.BooleanField(default=True)
-    offered_by = models.ForeignKey(Company, on_delete=models.CASCADE)
-    count = models.PositiveBigIntegerField(default=200)
-    token_value = models.FloatField()
-
-    class Meta:
-        """Meta definition for Token."""
-
-        verbose_name = "Token"
-        verbose_name_plural = "Tokens"
-
-    def __str__(self):
-        """Unicode representation of Token."""
-        return f'{self.offered_by}'

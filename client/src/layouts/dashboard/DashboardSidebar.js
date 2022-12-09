@@ -55,7 +55,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
 
   const isDesktop = useResponsive("up", "lg");
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
 
   useEffect(() => {
     if (isOpenSidebar) {

@@ -1,12 +1,11 @@
-from email.policy import default
 import os
 import uuid
-from typing import Iterable, Optional
 
-from config import settings
+from click import edit
+
 from django.db import models
+from django.core.exceptions import ValidationError
 from ffmpeg_streaming import FFProbe
-from management.models import Campaign, Company, Zone
 
 
 class Media(models.Model):
@@ -26,7 +25,7 @@ class Media(models.Model):
             verbose_name_plural = "MediaTypess"
 
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    campaigns = models.ManyToManyField(Company, blank=True, null=True)
+    campaigns = models.ManyToManyField("management.Company", blank=True, null=True)
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=100)
     type = models.CharField(
@@ -86,10 +85,14 @@ class Advertisement(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=255)
     created_on = models.DateTimeField(auto_created=True)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    campaigns = models.ManyToManyField(Campaign)
-    zone = models.ManyToManyField(Zone)
-    media = models.ManyToManyField(Media, blank=True, null=True)
+    company = models.ForeignKey("management.Company", on_delete=models.CASCADE)
+    campaigns = models.ManyToManyField("management.Campaign")
+    zone = models.ManyToManyField("management.Zone")
+    media = models.ManyToManyField("Media", blank=True, null=True)
+    assigned_credits = models.PositiveBigIntegerField(
+        blank=False, null=False, default=0, editable=False
+    )
+    per_view_credits = models.PositiveIntegerField(blank=False, null=False, default=0)
 
     class Meta:
         """Meta definition for Advertisement."""
@@ -100,3 +103,56 @@ class Advertisement(models.Model):
     def __str__(self):
         """Unicode representation of Advertisement."""
         return self.title
+
+
+class Reward(models.Model):
+    """Model definition for Reward."""
+
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    created_on = models.DateTimeField(auto_created=True)
+    is_valid = models.BooleanField(default=True)
+    offered_by = models.ForeignKey("management.Company", on_delete=models.CASCADE)
+    assigned_to = models.ForeignKey(
+        "Advertisement", null=True, blank=True, on_delete=models.SET_NULL
+    )
+    total = models.PositiveBigIntegerField(default=200)
+    per_view_value = models.PositiveSmallIntegerField(default=10)
+
+    class Meta:
+        """Meta definition for Reward."""
+
+        verbose_name = "Reward"
+        verbose_name_plural = "TReward"
+
+    def __str__(self):
+        """Unicode representation of Reward."""
+        return f"{self.offered_by}"
+
+
+class CreditAssignment(models.Model):
+
+    by = models.ForeignKey(
+        "management.Company", verbose_name="", on_delete=models.DO_NOTHING
+    )
+    to = models.ForeignKey(
+        "Advertisement", verbose_name="", on_delete=models.DO_NOTHING
+    )
+    amount = models.PositiveIntegerField()
+
+    def validate(self, data):
+        company: Company = self.by
+        current_credit = company.current_credit
+        assigned_amount = self.amount
+
+        if assigned_amount > current_credit:
+            raise ValidationError(
+                "%(assigned_amount) is greater than the Company's credit",
+                params={"assigned_amount": assigned_amount},
+            )
+
+    class Meta:
+        verbose_name = "Credit Assignment"
+        verbose_name_plural = "Credit Assignments"
+
+    def __str__(self):
+        return f"{self.by} - {self.to} of {self.amount} credits"

@@ -4,8 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
-from management.models import Campaign, Company, Token
-from management.serializers import CompanySerializer, TokenSerializer, CampaignSerializer
+from management.models import Campaign, Company
+from management.serializers import CompanySerializer, CampaignSerializer
 
 
 class CompanyList(APIView):
@@ -53,13 +53,7 @@ class CompanyDetails(APIView):
         company.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class TokenList(generics.ListCreateAPIView):
-    queryset = Token.objects.all()
-    serializer_class = TokenSerializer
 
-class TokenDetails(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Token.objects.all()
-    serializer_class = TokenSerializer
 
 class CampaignList(generics.ListCreateAPIView):
     queryset = Campaign.objects.all()
