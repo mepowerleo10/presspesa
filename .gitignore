@@ -26,6 +26,7 @@ chrome-user-data
 .venv
 static
 .env
+staticfiles
 
 packages/react-devtools-core/dist
 packages/react-devtools-extensions/chrome/build

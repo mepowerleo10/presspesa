@@ -192,12 +192,7 @@ JAZZMIN_UI_TWEAKS = {
 }
 
 
-STATIC_URL = "/static/"
-
-# Location of static files
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+STATIC_URL = "static/"
 
 # Path where static files are stored
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
