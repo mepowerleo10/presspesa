@@ -66,7 +66,7 @@ class Company(models.Model):
 
     def __str__(self):
         """Unicode representation of Company."""
-        return f"{self.name} ({self.web_url})"
+        return self.name
 
 
 class Campaign(models.Model):
